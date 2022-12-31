@@ -128,7 +128,13 @@ class _AddRecipeState extends State<AddRecipePage> {
 
   Color textFieldColor = Colors.grey.shade400;
   final _formKey = GlobalKey<FormState>(); //sm
-  String? recipeName;//sm
+  final _formKey1 = GlobalKey<FormState>(); //sm
+  final _formKey2 = GlobalKey<FormState>(); //sm
+  final TextEditingController recipeNameController = TextEditingController();//sm
+  final TextEditingController recipeDescriptionController = TextEditingController();//sm
+  final TextEditingController recipeNoteContoller = TextEditingController();//sm
+
+  String? recipeName, recipeDescription, recipeNotes;//sm
 
   @override
   Widget build(BuildContext context) {
@@ -138,38 +144,81 @@ class _AddRecipeState extends State<AddRecipePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TextField(
-              decoration: InputDecoration(
-                labelText: 'Name',
-                border: OutlineInputBorder(),
-                filled: true,
-                fillColor: textFieldColor,
+            Form(
+              key: _formKey,
+              child: TextFormField(
+                decoration: InputDecoration(
+                  labelText: 'Name',
+                  border: OutlineInputBorder(),
+                  filled: true,
+                  fillColor: textFieldColor,
+                ),
+                onChanged: (text) {
+                  print('First text field: $text');
+                },
+                controller: recipeNameController,
+                keyboardType: TextInputType.name,
+                onSaved: (value) {
+                  recipeNameController.text = value!;
+                },
+                textInputAction: TextInputAction.done,
               ),
-              onChanged: (text) {
-                print('First text field: $text');
-              },
             ),
-            TextField(
-              decoration: InputDecoration(
-                labelText: 'Description',
-                border: OutlineInputBorder(),
-                filled: true,
-                fillColor: textFieldColor,
+            Form(
+              key: _formKey1,
+              child: TextFormField(
+                decoration: InputDecoration(
+                  labelText: 'Description',
+                  border: OutlineInputBorder(),
+                  filled: true,
+                  fillColor: textFieldColor,
+                ),
+                onChanged: (text) {
+                  print('First text field: $text');
+                },
+                controller: recipeDescriptionController,
+                keyboardType: TextInputType.name,
+                onSaved: (value) {
+                  recipeDescriptionController.text = value!;
+                },
+                textInputAction: TextInputAction.done,
               ),
-              controller: myController,
             ),
-            TextField(
-              decoration: InputDecoration(
-                labelText: 'Notes',
-                border: OutlineInputBorder(),
-                filled: true,
-                fillColor: textFieldColor,
+            Form(
+              key: _formKey2,
+              child: TextFormField(
+                decoration: InputDecoration(
+                  labelText: 'Notes',
+                  border: OutlineInputBorder(),
+                  filled: true,
+                  fillColor: textFieldColor,
+                ),
+                onChanged: (text) {
+                  print('First text field: $text');
+                },
+                controller: recipeNoteContoller,
+                keyboardType: TextInputType.name,
+                onSaved: (value) {
+                  recipeNoteContoller.text = value!;
+                },
+                textInputAction: TextInputAction.done,
               ),
-              controller: myController,
             ),
+            ElevatedButton(onPressed: () {
+              recipeName = recipeNoteContoller.text;
+              recipeDescription = recipeDescriptionController.text;
+              recipeNotes = recipeNoteContoller.text;
+
+              Recipe addRecipe = Recipe(name: recipeName.toString(),
+                  description: recipeDescription.toString(),
+                  notes: recipeNotes.toString());
+                  print("Add this "+ addRecipe.toString()+" object to firebase.");
+            },
+                child: Text("publish recipe")),
           ],
         ),
       ),
-    );
+    );  
+
   }
 }
