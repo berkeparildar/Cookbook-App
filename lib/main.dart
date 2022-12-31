@@ -171,6 +171,7 @@ class _AddRecipeState extends State<AddRecipePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset : false,
       appBar: AppBar(
         backgroundColor: Colors.grey.shade800,
         title: Text("CookBook"),
@@ -239,7 +240,7 @@ class _AddRecipeState extends State<AddRecipePage> {
                       key: _formKey,
                       child: TextFormField(
                         decoration: InputDecoration(
-                          labelText: 'Vegetable Lasagna',
+                          hintText: 'Vegetable Lasagna',
                         ),
                         onChanged: (text) {
                           print('First text field: $text');
@@ -279,7 +280,7 @@ class _AddRecipeState extends State<AddRecipePage> {
                       key: _formKey1,
                       child: TextFormField(
                         decoration: InputDecoration(
-                          labelText: 'Wholesome hearty winter lasagna recipe',
+                          hintText: 'Wholesome hearty winter lasagna recipe',
                         ),
                         onChanged: (text) {
                           print('First text field: $text');
@@ -319,7 +320,7 @@ class _AddRecipeState extends State<AddRecipePage> {
                       key: _formKey2,
                       child: TextFormField(
                         decoration: InputDecoration(
-                          labelText: 'Best served with crusty garlic bread',
+                          hintText: 'Best served with crusty garlic bread',
                           filled: true,
                         ),
                         onChanged: (text) {

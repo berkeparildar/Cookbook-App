@@ -6,5 +6,6 @@ class Recipe {
   final String notes;
   final List<String> selectedTags;
 
-  Recipe({required this.name, required this.description, required this.notes, required this.selectedTags});
+  Recipe({required this.name, required this.description, required this.notes,
+    required this.selectedTags});
 }
