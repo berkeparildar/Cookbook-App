@@ -105,6 +105,7 @@ class AddRecipePage extends StatefulWidget {
 class _AddRecipeState extends State<AddRecipePage> {
   final myController = TextEditingController();
 
+
   @override
   void initState() {
     super.initState();
@@ -125,6 +126,10 @@ class _AddRecipeState extends State<AddRecipePage> {
     print('Second text field: ${myController.text}');
   }
 
+  Color textFieldColor = Colors.grey.shade400;
+  final _formKey = GlobalKey<FormState>(); //sm
+  String? recipeName;//sm
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -138,7 +143,7 @@ class _AddRecipeState extends State<AddRecipePage> {
                 labelText: 'Name',
                 border: OutlineInputBorder(),
                 filled: true,
-                fillColor: Colors.grey.shade800,
+                fillColor: textFieldColor,
               ),
               onChanged: (text) {
                 print('First text field: $text');
@@ -149,7 +154,7 @@ class _AddRecipeState extends State<AddRecipePage> {
                 labelText: 'Description',
                 border: OutlineInputBorder(),
                 filled: true,
-                fillColor: Colors.grey.shade800,
+                fillColor: textFieldColor,
               ),
               controller: myController,
             ),
@@ -158,7 +163,7 @@ class _AddRecipeState extends State<AddRecipePage> {
                 labelText: 'Notes',
                 border: OutlineInputBorder(),
                 filled: true,
-                fillColor: Colors.grey.shade800,
+                fillColor: textFieldColor,
               ),
               controller: myController,
             ),
