@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'recipe.dart';
 
-
 class AddRecipePage extends StatefulWidget {
   const AddRecipePage({super.key});
 
@@ -13,17 +12,43 @@ const List<Widget> listOfTags = <Widget>[
   Text("Asian"),
   Text("Breakfast"),
   Text("Dinner"),
-  Text("Dessert")
+  Text("Dessert"),
+  Text("Turkish"),
+  Text("Indian"),
+  Text("Vegetarian"),
+  Text("Salads"),
+  Text("Soups"),
+  Text("Italian"),
+  Text("Lunch"),
 ];
 
 class _AddRecipeState extends State<AddRecipePage> {
   final myController = TextEditingController();
-  final List<bool> selectedTags = <bool>[false, false, false, false];
+  final List<bool> selectedTags = <bool>[
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+  ];
   final List<String> tagList = <String>[
     "Asian",
     "Breakfast",
     "Dinner",
-    "Dessert"
+    "Dessert",
+    "Turkish",
+    "Indian",
+    "Vegetarian",
+    "Salads",
+    "Soups",
+    "Italian",
+    "Lunch"
   ];
   List<String> addRecipeTags = <String>[];
 
@@ -53,7 +78,7 @@ class _AddRecipeState extends State<AddRecipePage> {
   final _formKey2 = GlobalKey<FormState>();
   final TextEditingController recipeNameController = TextEditingController();
   final TextEditingController recipeDescriptionController =
-  TextEditingController();
+      TextEditingController();
   final TextEditingController recipeNoteContoller = TextEditingController();
 
   String? recipeName, recipeDescription, recipeNotes; //sm
@@ -124,9 +149,9 @@ class _AddRecipeState extends State<AddRecipePage> {
                     ),
                     Padding(
                         padding: EdgeInsets.symmetric(
-                          horizontal: 0,
-                          vertical: 4,
-                        )),
+                      horizontal: 0,
+                      vertical: 4,
+                    )),
                     Form(
                       key: _formKey,
                       child: TextFormField(
@@ -164,9 +189,9 @@ class _AddRecipeState extends State<AddRecipePage> {
                     ),
                     Padding(
                         padding: EdgeInsets.symmetric(
-                          horizontal: 0,
-                          vertical: 4,
-                        )),
+                      horizontal: 0,
+                      vertical: 4,
+                    )),
                     Form(
                       key: _formKey1,
                       child: TextFormField(
@@ -204,9 +229,9 @@ class _AddRecipeState extends State<AddRecipePage> {
                     ),
                     Padding(
                         padding: EdgeInsets.symmetric(
-                          horizontal: 0,
-                          vertical: 4,
-                        )),
+                      horizontal: 0,
+                      vertical: 4,
+                    )),
                     Form(
                       key: _formKey2,
                       child: TextFormField(
@@ -245,9 +270,9 @@ class _AddRecipeState extends State<AddRecipePage> {
                     ),
                     Padding(
                         padding: EdgeInsets.symmetric(
-                          horizontal: 0,
-                          vertical: 4,
-                        )),
+                      horizontal: 0,
+                      vertical: 4,
+                    )),
                   ],
                 ),
               ),
