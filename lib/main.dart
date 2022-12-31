@@ -17,9 +17,16 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           elevatedButtonTheme: ElevatedButtonThemeData(
               style: ElevatedButton.styleFrom(
-        fixedSize: const Size(250, 40),
-        backgroundColor: Colors.grey.shade800,
-      ))),
+            fixedSize: const Size(250, 40),
+            backgroundColor: Colors.grey.shade800,
+          )),
+          inputDecorationTheme: InputDecorationTheme(
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8)
+            ),
+            filled: true,
+            fillColor: Colors.white,
+          )),
       home: const MyHomePage(),
     );
   }
@@ -38,16 +45,10 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       body: DecoratedBox(
         decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("Assets/images/bg.jpg"),
-            fit: BoxFit.cover
-          )
-        ),
+            image: DecorationImage(
+                image: AssetImage("Assets/images/bg.jpg"), fit: BoxFit.cover)),
         child: BackdropFilter(
-          filter: ImageFilter.blur(
-            sigmaY: 10,
-            sigmaX: 10
-          ),
+          filter: ImageFilter.blur(sigmaY: 10, sigmaX: 10),
           child: Center(
             child: Column(
               children: <Widget>[
@@ -121,7 +122,6 @@ class AddRecipePage extends StatefulWidget {
 class _AddRecipeState extends State<AddRecipePage> {
   final myController = TextEditingController();
 
-
   @override
   void initState() {
     super.initState();
@@ -146,95 +146,215 @@ class _AddRecipeState extends State<AddRecipePage> {
   final _formKey = GlobalKey<FormState>(); //sm
   final _formKey1 = GlobalKey<FormState>(); //sm
   final _formKey2 = GlobalKey<FormState>(); //sm
-  final TextEditingController recipeNameController = TextEditingController();//sm
-  final TextEditingController recipeDescriptionController = TextEditingController();//sm
-  final TextEditingController recipeNoteContoller = TextEditingController();//sm
+  final TextEditingController recipeNameController =
+      TextEditingController(); //sm
+  final TextEditingController recipeDescriptionController =
+      TextEditingController(); //sm
+  final TextEditingController recipeNoteContoller =
+      TextEditingController(); //sm
 
-  String? recipeName, recipeDescription, recipeNotes;//sm
+  String? recipeName, recipeDescription, recipeNotes; //sm
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Form(
-              key: _formKey,
-              child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Name',
-                  border: OutlineInputBorder(),
-                  filled: true,
-                  fillColor: textFieldColor,
-                ),
-                onChanged: (text) {
-                  print('First text field: $text');
-                },
-                controller: recipeNameController,
-                keyboardType: TextInputType.name,
-                onSaved: (value) {
-                  recipeNameController.text = value!;
-                },
-                textInputAction: TextInputAction.done,
-              ),
+      appBar: AppBar(
+        backgroundColor: Colors.grey.shade800,
+        title: Text("CookBook"),
+        titleTextStyle: TextStyle(
+          fontFamily: "DancingScript",
+          fontSize: 35,
+        ),
+        centerTitle: true,
+        actions: [
+          TextButton(
+            style: TextButton.styleFrom(
+              foregroundColor: Colors.white
             ),
-            Form(
-              key: _formKey1,
-              child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Description',
-                  border: OutlineInputBorder(),
-                  filled: true,
-                  fillColor: textFieldColor,
-                ),
-                onChanged: (text) {
-                  print('First text field: $text');
-                },
-                controller: recipeDescriptionController,
-                keyboardType: TextInputType.name,
-                onSaved: (value) {
-                  recipeDescriptionController.text = value!;
-                },
-                textInputAction: TextInputAction.done,
-              ),
-            ),
-            Form(
-              key: _formKey2,
-              child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Notes',
-                  border: OutlineInputBorder(),
-                  filled: true,
-                  fillColor: textFieldColor,
-                ),
-                onChanged: (text) {
-                  print('First text field: $text');
-                },
-                controller: recipeNoteContoller,
-                keyboardType: TextInputType.name,
-                onSaved: (value) {
-                  recipeNoteContoller.text = value!;
-                },
-                textInputAction: TextInputAction.done,
-              ),
-            ),
-            ElevatedButton(onPressed: () {
+            onPressed: () {
               recipeName = recipeNoteContoller.text;
               recipeDescription = recipeDescriptionController.text;
               recipeNotes = recipeNoteContoller.text;
-
-              Recipe addRecipe = Recipe(name: recipeName.toString(),
+              Recipe addRecipe = Recipe(
+                  name: recipeName.toString(),
                   description: recipeDescription.toString(),
                   notes: recipeNotes.toString());
-                  print("Add this "+ addRecipe.toString()+" object to firebase.");
+              print(
+                  "Add this " + addRecipe.toString() + " object to firebase.");
             },
-                child: Text("publish recipe")),
-          ],
+            child: Row(
+              children: [
+                Text(
+                    "Save",
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
+                Icon(Icons.check_outlined)
+              ],
+            ),
+          ),
+        ],
+      ),
+      body: DecoratedBox(
+        decoration: BoxDecoration(color: Colors.grey.shade900),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.all(6),
+                child: Column(
+                  children: [
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        "Name",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                        padding: EdgeInsets.symmetric(
+                      horizontal: 0,
+                      vertical: 4,
+                    )),
+                    Form(
+                      key: _formKey,
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                          labelText: 'Vegetable Lasagna',
+                        ),
+                        onChanged: (text) {
+                          print('First text field: $text');
+                        },
+                        controller: recipeNameController,
+                        keyboardType: TextInputType.name,
+                        onSaved: (value) {
+                          recipeNameController.text = value!;
+                        },
+                        textInputAction: TextInputAction.done,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.all(6),
+                child: Column(
+                  children: [
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        "Description",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                        padding: EdgeInsets.symmetric(
+                      horizontal: 0,
+                      vertical: 4,
+                    )),
+                    Form(
+                      key: _formKey1,
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                          labelText: 'Wholesome hearty winter lasagna recipe',
+                        ),
+                        onChanged: (text) {
+                          print('First text field: $text');
+                        },
+                        controller: recipeDescriptionController,
+                        keyboardType: TextInputType.name,
+                        onSaved: (value) {
+                          recipeDescriptionController.text = value!;
+                        },
+                        textInputAction: TextInputAction.done,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.all(6),
+                child: Column(
+                  children: [
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        "Recipe Notes",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 0,
+                          vertical: 4,
+                        )),
+                    Form(
+                      key: _formKey2,
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                          labelText: 'Best served with crusty garlic bread',
+                          filled: true,
+                        ),
+                        onChanged: (text) {
+                          print('First text field: $text');
+                        },
+                        controller: recipeNoteContoller,
+                        keyboardType: TextInputType.name,
+                        onSaved: (value) {
+                          recipeNoteContoller.text = value!;
+                        },
+                        textInputAction: TextInputAction.done,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.all(6),
+                child: Column(
+                  children: [
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        "Recipe Notes",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 0,
+                          vertical: 4,
+                        )
+                    ),
+                    Expanded(
+                      
+                        child: Row(
+                    ))
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
-    );  
-
+    );
   }
 }
