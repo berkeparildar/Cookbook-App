@@ -21,9 +21,7 @@ class MyApp extends StatelessWidget {
             backgroundColor: Colors.grey.shade800,
           )),
           inputDecorationTheme: InputDecorationTheme(
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8)
-            ),
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
             filled: true,
             fillColor: Colors.white,
           )),
@@ -57,7 +55,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Center(
                       child: Text(
                     "COOKBOOK",
-                    style: TextStyle(fontFamily: "DancingScript", fontSize: 55),
+                    style: TextStyle(
+                        fontFamily: "DancingScript",
+                        fontSize: 55,
+                        fontWeight: FontWeight.bold),
                   )),
                 ),
                 Expanded(
@@ -119,8 +120,20 @@ class AddRecipePage extends StatefulWidget {
   _AddRecipeState createState() => _AddRecipeState();
 }
 
+const List<Widget> listOfTags = <Widget>[
+  Text("Asian"),
+  Text("Breakfast"),
+  Text("Dinner"),
+  Text("Dessert")
+];
+
+const List<String> placeHolder = <String>[
+  "a",
+];
+
 class _AddRecipeState extends State<AddRecipePage> {
   final myController = TextEditingController();
+  final List<bool> selectedTags = <bool>[false, false, false, false];
 
   @override
   void initState() {
@@ -143,15 +156,15 @@ class _AddRecipeState extends State<AddRecipePage> {
   }
 
   Color textFieldColor = Colors.grey.shade400;
-  final _formKey = GlobalKey<FormState>(); //sm
-  final _formKey1 = GlobalKey<FormState>(); //sm
-  final _formKey2 = GlobalKey<FormState>(); //sm
+  final _formKey = GlobalKey<FormState>();
+  final _formKey1 = GlobalKey<FormState>();
+  final _formKey2 = GlobalKey<FormState>();
   final TextEditingController recipeNameController =
-      TextEditingController(); //sm
+      TextEditingController();
   final TextEditingController recipeDescriptionController =
-      TextEditingController(); //sm
+      TextEditingController();
   final TextEditingController recipeNoteContoller =
-      TextEditingController(); //sm
+      TextEditingController();
 
   String? recipeName, recipeDescription, recipeNotes; //sm
 
@@ -168,24 +181,24 @@ class _AddRecipeState extends State<AddRecipePage> {
         centerTitle: true,
         actions: [
           TextButton(
-            style: TextButton.styleFrom(
-              foregroundColor: Colors.white
-            ),
+            style: TextButton.styleFrom(foregroundColor: Colors.white),
             onPressed: () {
               recipeName = recipeNoteContoller.text;
               recipeDescription = recipeDescriptionController.text;
               recipeNotes = recipeNoteContoller.text;
               Recipe addRecipe = Recipe(
-                  name: recipeName.toString(),
-                  description: recipeDescription.toString(),
-                  notes: recipeNotes.toString());
+                name: recipeName.toString(),
+                description: recipeDescription.toString(),
+                notes: recipeNotes.toString(),
+                selectedTags: placeHolder,
+              );
               print(
                   "Add this " + addRecipe.toString() + " object to firebase.");
             },
             child: Row(
-              children: [
+              children: const [
                 Text(
-                    "Save",
+                  "Save",
                   style: TextStyle(
                     fontSize: 16,
                   ),
@@ -299,9 +312,9 @@ class _AddRecipeState extends State<AddRecipePage> {
                     ),
                     Padding(
                         padding: EdgeInsets.symmetric(
-                          horizontal: 0,
-                          vertical: 4,
-                        )),
+                      horizontal: 0,
+                      vertical: 4,
+                    )),
                     Form(
                       key: _formKey2,
                       child: TextFormField(
@@ -326,11 +339,11 @@ class _AddRecipeState extends State<AddRecipePage> {
               Padding(
                 padding: EdgeInsets.all(6),
                 child: Column(
-                  children: [
+                  children: const [
                     Align(
                       alignment: Alignment.topLeft,
                       child: Text(
-                        "Recipe Notes",
+                        "Tags",
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -340,17 +353,31 @@ class _AddRecipeState extends State<AddRecipePage> {
                     ),
                     Padding(
                         padding: EdgeInsets.symmetric(
-                          horizontal: 0,
-                          vertical: 4,
-                        )
-                    ),
-                    Expanded(
-                      
-                        child: Row(
-                    ))
+                      horizontal: 0,
+                      vertical: 4,
+                    )),
                   ],
                 ),
               ),
+              ToggleButtons(
+                constraints: const BoxConstraints(
+                  minHeight: 60,
+                  minWidth: 80
+                ),
+                color: Colors.white,
+                isSelected: selectedTags,
+                selectedColor: Colors.white,
+                borderColor: Colors.white,
+                borderRadius: BorderRadius.all(Radius.circular(8)),
+                fillColor: Colors.blueGrey,
+                selectedBorderColor: Colors.blueGrey,
+                onPressed: (int i){
+                  setState((){
+                    selectedTags[i] = !selectedTags[i];
+                  });
+                },
+                children: listOfTags,
+              )
             ],
           ),
         ),
