@@ -16,13 +16,10 @@ Recipe r3 = Recipe(name: "kapama", description: "yemek", notes: "yap",
 Recipe r4 = Recipe(name: "kapama", description: "yemek", notes: "yap",
     selectedTags: ["Turkish"]);
 
-
 class TagsPage extends StatelessWidget {
   final List<String> tagList;
 
   TagsPage({super.key, required this.tagList});
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +34,9 @@ class TagsPage extends StatelessWidget {
           ),
           centerTitle: true,
         ),
-        bottomNavigationBar: BottomBar(),
+        bottomNavigationBar: BottomBar(
+          selectedIndex: 2,
+        ),
         body: DecoratedBox(
           decoration: BoxDecoration(color: Colors.grey.shade900),
           child: GridView.count(
@@ -54,7 +53,7 @@ class TagsInList extends StatelessWidget {
   final String tag;
   List<Recipe> selectedRecipe = [];
 
-  List<Recipe> recipeList = [r1, r2, r3, r4];
+  static List<Recipe> recipeList = [r1, r2, r3, r4];
 
   List<Recipe> returnRecipeList(List<Recipe> arr, String tag){
     List<Recipe> toReturn = [];
@@ -80,6 +79,7 @@ class TagsInList extends StatelessWidget {
             MaterialPageRoute(
                 builder: (context) => MyRecipes(
                     recipeList: returnRecipeList(recipeList, tag),
+                  selectedIndex: 2,
                 )),
           );
         },

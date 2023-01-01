@@ -106,6 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                             notes: "00:40",
                                             selectedTags: ["selectedTags"])
                                       ],
+                                  selectedIndex: 0,
                                     )));
                           },
                           child: Row(

@@ -1,14 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:se380_project/add_recipe.dart';
+import 'package:se380_project/my_recipes.dart';
+import 'package:se380_project/tags.dart';
+import 'package:se380_project/recipe.dart';
 
 class BottomBar extends StatefulWidget {
-  const BottomBar({Key? key}) : super(key: key);
-
+  BottomBar({Key? key, required this.selectedIndex}) : super(key: key);
+  int selectedIndex;
   @override
   State<BottomBar> createState() => _BottomBarState();
 }
+List<String> tags = AddRecipePage.getTags();
 
 class _BottomBarState extends State<BottomBar> {
-  int selectedIndex = 0;
+
+  List<Widget> widList = [
+    MyRecipes(
+      recipeList: [r1, r2, r3, r4],
+      selectedIndex: 0,
+  ),
+    Text("data"),
+    TagsPage(
+        tagList: tags,
+    )
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -39,11 +55,13 @@ class _BottomBarState extends State<BottomBar> {
               icon: Icon(Icons.receipt_long)
           )
         ],
-        currentIndex: selectedIndex,
+        currentIndex: widget.selectedIndex,
         onTap: (int index) {
           setState(() {
-            selectedIndex = index;
+            widget.selectedIndex = index;
             print(index);
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => widList[index],));
           });
         },
       ),

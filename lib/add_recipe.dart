@@ -24,6 +24,7 @@ const List<Widget> listOfTags = <Widget>[
   Text("Soups"),
   Text("Italian"),
   Text("Lunch"),
+  Text("Snacks")
 ];
 
 class _AddRecipeState extends State<AddRecipePage> {
@@ -39,8 +40,12 @@ class _AddRecipeState extends State<AddRecipePage> {
     false,
     false,
     false,
+    false,
     false
   ];
+
+
+
   static final List<String> tagList = <String>[
     "Asian",
     "Breakfast",
@@ -52,7 +57,8 @@ class _AddRecipeState extends State<AddRecipePage> {
     "Salads",
     "Soups",
     "Italian",
-    "Lunch"
+    "Lunch",
+    "Snacks"
   ];
   List<String> addRecipeTags = <String>[];
 
@@ -280,10 +286,22 @@ class _AddRecipeState extends State<AddRecipePage> {
                   ],
                 ),
               ),
-              buildToggleButtons()
-              /*ListView(
-                  children: List<Widget>.generate(
-                      tagList.length, (index) => buildToggleButtons())),*/
+              buildToggleButtons(0,3),
+              Padding(padding: EdgeInsets.symmetric(
+                vertical: 8,
+                horizontal: 0
+              )),
+              buildToggleButtons(3,6),
+              Padding(padding: EdgeInsets.symmetric(
+                  vertical: 8,
+                  horizontal: 0
+              )),
+              buildToggleButtons(6,9),
+              Padding(padding: EdgeInsets.symmetric(
+                  vertical: 8,
+                  horizontal: 0
+              )),
+              buildToggleButtons(9,12),
             ],
           ),
         ),
@@ -291,22 +309,22 @@ class _AddRecipeState extends State<AddRecipePage> {
     );
   }
 
-  ToggleButtons buildToggleButtons() {
+  ToggleButtons buildToggleButtons(int start, int end) {
     return ToggleButtons(
       constraints: const BoxConstraints(
-        minHeight: 60,
-        minWidth: 80,
+        minHeight: 30,
+        minWidth: 90,
       ),
       color: Colors.white,
-      isSelected: selectedTags,
+      isSelected: selectedTags.sublist(start, end),
       selectedColor: Colors.white,
-      borderColor: Colors.white,
       borderRadius: BorderRadius.all(Radius.circular(8)),
       fillColor: Colors.blueGrey,
+      borderColor: Colors.white,
       selectedBorderColor: Colors.blueGrey,
       onPressed: (int i) {
         setState(() {
-          selectedTags[i] = !selectedTags[i];
+          selectedTags[i + start] = !selectedTags[i + start];
           if (selectedTags[i] == true) {
             addRecipeTags.add(_AddRecipeState.tagList[i]);
           } else if (selectedTags[i] == false) {
@@ -314,7 +332,7 @@ class _AddRecipeState extends State<AddRecipePage> {
           }
         });
       },
-      children: listOfTags,
+      children: listOfTags.sublist(start,end),
     );
   }
 }
