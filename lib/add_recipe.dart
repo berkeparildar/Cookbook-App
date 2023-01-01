@@ -342,6 +342,23 @@ class _AddRecipeState extends State<AddRecipePage> {
                                 minLines: 15,
                               )),
                           Form(
+                              key: _formKey5,
+                              child: TextFormField(
+                                decoration: InputDecoration(
+                                    hintText: "Enter your method here"),
+                                onChanged: (text) {
+                                  print('First text field: $text');
+                                },
+                                controller: methodController,
+                                keyboardType: TextInputType.name,
+                                onSaved: (value) {
+                                  methodController.text = value!;
+                                },
+                                textInputAction: TextInputAction.done,
+                                maxLines: 10,
+                                minLines: 5,
+                              )),
+                          Form(
                               key: _formKey6,
                               child: TextFormField(
                                 decoration: InputDecoration(
@@ -356,7 +373,7 @@ class _AddRecipeState extends State<AddRecipePage> {
                                 },
                                 textInputAction: TextInputAction.done,
                                 maxLines: 10,
-                                minLines: 5,
+                                minLines: 3,
                               )),
                           Form(
                               key: _formKey7,
@@ -373,25 +390,9 @@ class _AddRecipeState extends State<AddRecipePage> {
                                 },
                                 textInputAction: TextInputAction.done,
                                 maxLines: 10,
-                                minLines: 5,
+                                minLines: 3,
                               )),
-                          Form(
-                              key: _formKey5,
-                              child: TextFormField(
-                                decoration: InputDecoration(
-                                    hintText: "Enter your method here"),
-                                onChanged: (text) {
-                                  print('First text field: $text');
-                                },
-                                controller: methodController,
-                                keyboardType: TextInputType.name,
-                                onSaved: (value) {
-                                  methodController.text = value!;
-                                },
-                                textInputAction: TextInputAction.done,
-                                maxLines: 10,
-                                minLines: 5,
-                              ))
+
                         ],
                       ),
                     )
