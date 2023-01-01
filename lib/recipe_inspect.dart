@@ -31,9 +31,12 @@ class _RecipeInspectState extends State<RecipeInspect> {
     return x;
   }
 
+
   List<String> arr = ["Breakfast ", "Healthy ", "Lunch "];
   @override
   Widget build(BuildContext context) {
+    String prepTime = widget.recipe.preparingTime;
+    String cookTime = widget.recipe.cookingTime;
     Icon someIcon = getIcon(widget.recipe.isFavorite);
     return Scaffold(
       backgroundColor: Colors.grey.shade900,
@@ -64,7 +67,7 @@ class _RecipeInspectState extends State<RecipeInspect> {
             image: AssetImage("Assets/images/food1.jpg"),
           ),
           SizedBox(
-            height: 80,
+            height: 100,
             width: double.infinity,
             child: DecoratedBox(
               decoration: BoxDecoration(
@@ -79,7 +82,7 @@ class _RecipeInspectState extends State<RecipeInspect> {
                   children: [
                     Center(
                       child: Text(
-                        "Recipe Name",
+                        widget.recipe.name,
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 20
@@ -106,7 +109,7 @@ class _RecipeInspectState extends State<RecipeInspect> {
           Padding(
               padding: EdgeInsets.all(24),
             child: Row(
-              children: const [
+              children: [
                 Expanded(
                   flex: 50,
                     child: Center(
@@ -123,7 +126,7 @@ class _RecipeInspectState extends State<RecipeInspect> {
                   flex: 50,
                     child: Center(
                       child: Text(
-                        "Prep: 5 mins",
+                        ("Prep: $prepTime" ),
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 16,
@@ -136,25 +139,25 @@ class _RecipeInspectState extends State<RecipeInspect> {
           ),
           Center(
             child: Text(
-              "Cook: 5 mins",
+              "Cook: $cookTime",
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 16
               ),
             ),
           ),
-          const Padding(
+           Padding(
               padding: EdgeInsets.all(12),
             child: Text(
               textAlign: TextAlign.center,
-              "Perfect healthy breakfast for easy mornings. Acai bowls are essentialy thick smoothie bowls loaded with toppings - yum!",
+              widget.recipe.description,
               style: TextStyle(
                 color: Colors.white
               ),
             ),
           ),
           Wrap(
-            children: List<Widget>.generate(arr.length, (index) => Text(
+            children: List<Widget>.generate(widget.recipe.selectedTags.length, (index) => Text(
                 arr[index] + " ",
               style: TextStyle(
                 color: Colors.white,

@@ -108,7 +108,7 @@ class _AddRecipeState extends State<AddRecipePage> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         backgroundColor: Colors.grey.shade800,
         title: Text("CookBook"),
@@ -451,9 +451,9 @@ class _AddRecipeState extends State<AddRecipePage> {
       onPressed: (int i) {
         setState(() {
           selectedTags[i + start] = !selectedTags[i + start];
-          if (selectedTags[i] == true) {
+          if (selectedTags[i + start] == true) {
             addRecipeTags.add(_AddRecipeState.tagList[i+start]);
-          } else if (selectedTags[i] == false) {
+          } else if (selectedTags[i + start] == false) {
             addRecipeTags.remove(_AddRecipeState.tagList[i+start]);
           }
         });
