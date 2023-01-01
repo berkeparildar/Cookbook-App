@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:se380_project/bottom_bar.dart';
 import 'package:se380_project/main.dart';
-import 'recipe.dart';
+import 'package:se380_project/recipe.dart';
 
 class AddRecipePage extends StatefulWidget {
   const AddRecipePage({super.key});

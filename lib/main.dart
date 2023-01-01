@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:se380_project/favorites_page.dart';
 import 'package:se380_project/my_recipes.dart';
+import 'package:se380_project/recipe_inspect.dart';
 import 'add_recipe.dart';
 import 'package:se380_project/recipe.dart';
 import 'tags.dart';
@@ -133,7 +134,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => FavoritesPage(recipeList: [],
+                                  builder: (context) => FavoritesPage(recipeList: recipes,
                                     selectedIndex: 2,)),
                             );
                           },
@@ -163,7 +164,8 @@ class _MyHomePageState extends State<MyHomePage> {
                             ],
                           ),
                         ),
-                      )
+                      ),
+
                     ],
                   ),
                 ),

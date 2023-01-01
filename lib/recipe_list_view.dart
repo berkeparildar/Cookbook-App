@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:se380_project/main.dart';
 import 'package:se380_project/recipe.dart';
 import 'package:se380_project/recipe_inspect.dart';
 
@@ -18,7 +19,9 @@ class _RecipeListViewState extends State<RecipeListView> {
       child: TextButton(
         onPressed: () {
           Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => RecipeInspect()));
+              builder: (context) => RecipeInspect(
+                recipe: MyHomePage.getRecipes()[index],
+              )));
         },
         child: Row(
           children: [

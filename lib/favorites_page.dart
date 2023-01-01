@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:se380_project/main.dart';
 import 'package:se380_project/recipe.dart';
 import 'package:se380_project/recipe_list_view.dart';
 
@@ -28,6 +29,17 @@ class _FavoritesPageState extends State<FavoritesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: TextButton(
+          onPressed: () {
+            setState(() {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => MyHomePage()),
+              );
+            });
+          }, child: Icon(Icons.arrow_back),
+        ),
         backgroundColor: Colors.grey.shade800,
         title: const Text("CookBook"),
         titleTextStyle: const TextStyle(
@@ -35,6 +47,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
           fontSize: 35,
         ),
         centerTitle: true,
+
       ),
         body: DecoratedBox(
           decoration: BoxDecoration(

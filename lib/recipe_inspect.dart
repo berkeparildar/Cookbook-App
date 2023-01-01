@@ -1,16 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:se380_project/recipe.dart';
 
 class RecipeInspect extends StatefulWidget {
-  const RecipeInspect({Key? key}) : super(key: key);
+  const RecipeInspect({Key? key, required this.recipe}) : super(key: key);
+  final Recipe recipe;
+
 
   @override
   State<RecipeInspect> createState() => _RecipeInspectState();
 }
 
 class _RecipeInspectState extends State<RecipeInspect> {
+
+  void checkFavorite(Recipe r){
+    if (r.isFavorite != true ){
+      r.isFavorite = true;
+    }
+    else {
+      r.isFavorite = false;
+    }
+  }
+  Icon getIcon(bool a){
+    Icon x = Icon(Icons.add);
+    if (a) {
+      x = Icon(Icons.favorite);
+    }
+    else {
+      x = Icon(Icons.favorite_border);
+    }
+    return x;
+  }
+
   List<String> arr = ["Breakfast ", "Healthy ", "Lunch "];
   @override
   Widget build(BuildContext context) {
+    Icon someIcon = getIcon(widget.recipe.isFavorite);
     return Scaffold(
       backgroundColor: Colors.grey.shade900,
       appBar: AppBar(
@@ -21,6 +45,18 @@ class _RecipeInspectState extends State<RecipeInspect> {
           fontSize: 35,
         ),
         centerTitle: true,
+        actions: [
+          TextButton(
+            style: TextButton.styleFrom(foregroundColor: Colors.white),
+            onPressed: () {
+              setState(() {
+                checkFavorite(widget.recipe);
+                someIcon = getIcon(widget.recipe.isFavorite);
+              });
+            },
+            child: someIcon
+          ),
+        ],
       ),
       body: Column(
         children: [
