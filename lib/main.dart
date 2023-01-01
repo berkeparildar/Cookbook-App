@@ -1,8 +1,8 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
+import 'package:se380_project/my_recipes.dart';
 import 'add_recipe.dart';
-import 'recipe.dart';
+import 'package:se380_project/recipe.dart';
 import 'tags.dart';
 
 void main() {
@@ -46,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: DecoratedBox(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             image: DecorationImage(
                 image: AssetImage("Assets/images/bg.jpg"), fit: BoxFit.cover)),
         child: BackdropFilter(
@@ -69,40 +69,65 @@ class _MyHomePageState extends State<MyHomePage> {
                   flex: 60,
                   child: Column(
                     children: [
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const AddRecipePage()),
-                          );
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Text("Add recipe"),
-                            const Icon(Icons.add),
-                          ],
+                      Padding(
+                        padding: const EdgeInsets.all(4),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const AddRecipePage()),
+                            );
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: const [
+                              Text("Add recipe"),
+                              Icon(Icons.add),
+                            ],
+                          ),
                         ),
                       ),
-                      ElevatedButton(
-                        onPressed: () {},
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Text("My Recipes"),
-                            const Icon(Icons.search),
-                          ],
+                      Padding(
+                        padding: const EdgeInsets.all(4),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => MyRecipes(
+                                      recipeList: [
+                                        Recipe(
+                                            name: "Berry Acai Bowl",
+                                            description: "00:05",
+                                            notes: "00:05",
+                                            selectedTags: ["r"]),
+                                        Recipe(
+                                            name: "Pumpkin Soup",
+                                            description: "00:15",
+                                            notes: "00:40",
+                                            selectedTags: ["selectedTags"])
+                                      ],
+                                    )));
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: const [
+                              Text("My Recipes"),
+                              Icon(Icons.search),
+                            ],
+                          ),
                         ),
                       ),
-                      ElevatedButton(
-                        onPressed: () {},
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Text("Favourites"),
-                            const Icon(Icons.favorite),
-                          ],
+                      Padding(
+                        padding: const EdgeInsets.all(4),
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: const [
+                              Text("Favourites"),
+                              Icon(Icons.favorite),
+                            ],
+                          ),
                         ),
                       ),
                       ElevatedButton(
@@ -130,5 +155,3 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
-
