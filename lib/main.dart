@@ -95,16 +95,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) => MyRecipes(
                                       recipeList: [
-                                        Recipe(
-                                            name: "Berry Acai Bowl",
-                                            description: "00:05",
-                                            notes: "00:05",
-                                            selectedTags: ["r"]),
-                                        Recipe(
-                                            name: "Pumpkin Soup",
-                                            description: "00:15",
-                                            notes: "00:40",
-                                            selectedTags: ["selectedTags"])
+
                                       ],
                                   selectedIndex: 0,
                                     )));
@@ -121,7 +112,13 @@ class _MyHomePageState extends State<MyHomePage> {
                       Padding(
                         padding: const EdgeInsets.all(4),
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => AddRecipePage()),
+                            );
+                          },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: const [

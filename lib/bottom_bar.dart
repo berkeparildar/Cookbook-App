@@ -4,6 +4,7 @@ import 'package:se380_project/my_recipes.dart';
 import 'package:se380_project/tags.dart';
 import 'package:se380_project/recipe.dart';
 
+
 class BottomBar extends StatefulWidget {
   BottomBar({Key? key, required this.selectedIndex, required this.isInAddRecipe}) : super(key: key);
   final bool isInAddRecipe;
@@ -18,13 +19,21 @@ List<String> addTags = ["About", "Ingredients", "Method"];
 List<Icon> recipeIcons = [const Icon(Icons.newspaper), const Icon(Icons.shopping_bag_outlined), const Icon(Icons.format_list_bulleted)];
 List<Widget> menuWidgetList = [
   MyRecipes(
-    recipeList: [r1, r2, r3, r4],
+    recipeList: [],
     selectedIndex: 0,
   ),
   Text("data"),
   TagsPage(
     tagList: tags,
   )
+];
+
+List<Widget> recipeWidgets = [
+  AddRecipePage(),
+  //IngredientsPage(),
+  Text("data"),
+  Text("data")
+
 ];
 class _BottomBarState extends State<BottomBar> {
   
@@ -53,7 +62,7 @@ class _BottomBarState extends State<BottomBar> {
   List<Widget> checkDirection(bool b){
     List<Widget> widList = [];
     if (b){
-      widList = [];
+      widList = recipeWidgets;
     }
     else{
       widList = menuWidgetList;

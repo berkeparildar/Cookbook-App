@@ -4,17 +4,7 @@ import 'package:se380_project/bottom_bar.dart';
 import 'package:se380_project/my_recipes.dart';
 import 'package:se380_project/recipe.dart';
 
-Recipe r1 = Recipe(name: "kuru fasulye", description: "yemek", notes: "yap",
-    selectedTags: ["Turkish", "Asian"]);
 
-Recipe r2 = Recipe(name: "keskek", description: "yemek", notes: "yap",
-    selectedTags: ["Turkish"]);
-
-Recipe r3 = Recipe(name: "kapama", description: "yemek", notes: "yap",
-    selectedTags: ["Turkish"]);
-
-Recipe r4 = Recipe(name: "kapama", description: "yemek", notes: "yap",
-    selectedTags: ["Turkish"]);
 
 class TagsPage extends StatelessWidget {
   final List<String> tagList;
@@ -59,7 +49,7 @@ class TagsInList extends StatelessWidget {
   final String tag;
   List<Recipe> selectedRecipe = [];
 
-  static List<Recipe> recipeList = [r1, r2, r3, r4];
+  static List<Recipe> recipeList = [];
 
   List<Recipe> returnRecipeList(List<Recipe> arr, String tag){
     List<Recipe> toReturn = [];

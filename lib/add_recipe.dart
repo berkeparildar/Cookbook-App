@@ -11,6 +11,7 @@ class AddRecipePage extends StatefulWidget {
 
   @override
   _AddRecipeState createState() => _AddRecipeState();
+
 }
 
 const List<Widget> listOfTags = <Widget>[
@@ -66,15 +67,12 @@ class _AddRecipeState extends State<AddRecipePage> {
   @override
   void initState() {
     super.initState();
-
-    // Start listening to changes.
     myController.addListener(_printLatestValue);
   }
 
   @override
   void dispose() {
-    // Clean up the controller when the widget is removed from the widget tree.
-    // This also removes the _printLatestValue listener.
+
     myController.dispose();
     super.dispose();
   }
@@ -91,11 +89,16 @@ class _AddRecipeState extends State<AddRecipePage> {
   final TextEditingController recipeDescriptionController =
       TextEditingController();
   final TextEditingController recipeNoteContoller = TextEditingController();
+  final _formKey4 = GlobalKey<FormState>();
+  final TextEditingController ingredientController = TextEditingController();
 
-  String? recipeName, recipeDescription, recipeNotes; //sm
+  String? recipeName, recipeDescription, recipeNotes,recipeIngredient;
+
+
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -109,20 +112,7 @@ class _AddRecipeState extends State<AddRecipePage> {
         actions: [
           TextButton(
             style: TextButton.styleFrom(foregroundColor: Colors.white),
-            onPressed: () {
-              recipeName = recipeNoteContoller.text;
-              recipeDescription = recipeDescriptionController.text;
-              recipeNotes = recipeNoteContoller.text;
-              Recipe addRecipe = Recipe(
-                name: recipeName.toString(),
-                description: recipeDescription.toString(),
-                notes: recipeNotes.toString(),
-                selectedTags: addRecipeTags,
-              );
-              print(
-                  "Add this " + addRecipe.toString() + " object to firebase.");
-              print(addRecipe.selectedTags);
-            },
+            onPressed: saveRecipe,
             child: Row(
               children: const [
                 Text(
@@ -137,173 +127,219 @@ class _AddRecipeState extends State<AddRecipePage> {
           ),
         ],
       ),
-      body: DecoratedBox(
-        decoration: BoxDecoration(color: Colors.grey.shade900),
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.all(6),
-                child: Column(
-                  children: [
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Text(
-                        "Name",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: DecoratedBox(
+          decoration: BoxDecoration(color: Colors.grey.shade900),
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(6),
+                  child: Column(
+                    children: [
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          "Name",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          ),
                         ),
                       ),
-                    ),
-                    Padding(
-                        padding: EdgeInsets.symmetric(
-                      horizontal: 0,
-                      vertical: 4,
-                    )),
-                    Form(
-                      key: _formKey,
-                      child: TextFormField(
-                        decoration: InputDecoration(
-                          hintText: 'Vegetable Lasagna',
+                      Padding(
+                          padding: EdgeInsets.symmetric(
+                        horizontal: 0,
+                        vertical: 4,
+                      )),
+                      Form(
+                        key: _formKey,
+                        child: TextFormField(
+                          decoration: InputDecoration(
+                            hintText: 'Vegetable Lasagna',
+                          ),
+                          onChanged: (text) {
+                            print('First text field: $text');
+                          },
+                          controller: recipeNameController,
+                          keyboardType: TextInputType.name,
+                          onSaved: (value) {
+                            recipeNameController.text = value!;
+                          },
+                          textInputAction: TextInputAction.done,
                         ),
-                        onChanged: (text) {
-                          print('First text field: $text');
-                        },
-                        controller: recipeNameController,
-                        keyboardType: TextInputType.name,
-                        onSaved: (value) {
-                          recipeNameController.text = value!;
-                        },
-                        textInputAction: TextInputAction.done,
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              Padding(
-                padding: EdgeInsets.all(6),
-                child: Column(
-                  children: [
-                    const Align(
-                      alignment: Alignment.topLeft,
-                      child: Text(
-                        "Description",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
+                Padding(
+                  padding: EdgeInsets.all(6),
+                  child: Column(
+                    children: [
+                      const Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          "Description",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          ),
                         ),
                       ),
-                    ),
-                    Padding(
-                        padding: EdgeInsets.symmetric(
-                      horizontal: 0,
-                      vertical: 4,
-                    )),
-                    Form(
-                      key: _formKey1,
-                      child: TextFormField(
-                        decoration: InputDecoration(
-                          hintText: 'Wholesome hearty winter lasagna recipe',
+                      Padding(
+                          padding: EdgeInsets.symmetric(
+                        horizontal: 0,
+                        vertical: 4,
+                      )),
+                      Form(
+                        key: _formKey1,
+                        child: TextFormField(
+                          decoration: InputDecoration(
+                            hintText: 'Wholesome hearty winter lasagna recipe',
+                          ),
+                          onChanged: (text) {
+                            print('First text field: $text');
+                          },
+                          controller: recipeDescriptionController,
+                          keyboardType: TextInputType.name,
+                          onSaved: (value) {
+                            recipeDescriptionController.text = value!;
+                          },
+                          textInputAction: TextInputAction.done,
                         ),
-                        onChanged: (text) {
-                          print('First text field: $text');
-                        },
-                        controller: recipeDescriptionController,
-                        keyboardType: TextInputType.name,
-                        onSaved: (value) {
-                          recipeDescriptionController.text = value!;
-                        },
-                        textInputAction: TextInputAction.done,
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              Padding(
-                padding: EdgeInsets.all(6),
-                child: Column(
-                  children: [
-                    const Align(
-                      alignment: Alignment.topLeft,
-                      child: Text(
-                        "Recipe Notes",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
+                Padding(
+                  padding: EdgeInsets.all(6),
+                  child: Column(
+                    children: [
+                      const Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          "Recipe Notes",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          ),
                         ),
                       ),
-                    ),
-                    const Padding(
-                        padding: EdgeInsets.symmetric(
-                      horizontal: 0,
-                      vertical: 4,
-                    )),
-                    Form(
-                      key: _formKey2,
-                      child: TextFormField(
-                        decoration: const InputDecoration(
-                          hintText: 'Best served with crusty garlic bread',
-                          filled: true,
+                      const Padding(
+                          padding: EdgeInsets.symmetric(
+                        horizontal: 0,
+                        vertical: 4,
+                      )),
+                      Form(
+                        key: _formKey2,
+                        child: TextFormField(
+                          decoration: const InputDecoration(
+                            hintText: 'Best served with crusty garlic bread',
+                            filled: true,
+                          ),
+                          onChanged: (text) {
+                            print('First text field: $text');
+                          },
+                          controller: recipeNoteContoller,
+                          keyboardType: TextInputType.name,
+                          onSaved: (value) {
+                            recipeNoteContoller.text = value!;
+                          },
+                          textInputAction: TextInputAction.done,
                         ),
-                        onChanged: (text) {
-                          print('First text field: $text');
-                        },
-                        controller: recipeNoteContoller,
-                        keyboardType: TextInputType.name,
-                        onSaved: (value) {
-                          recipeNoteContoller.text = value!;
-                        },
-                        textInputAction: TextInputAction.done,
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              Padding(
-                padding: EdgeInsets.all(6),
-                child: Column(
-                  children: const [
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Text(
-                        "Tags",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
+                Padding(
+                  padding: EdgeInsets.all(6),
+                  child: Column(
+                    children: const [
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          "Tags",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          ),
                         ),
                       ),
-                    ),
-                    Padding(
-                        padding: EdgeInsets.symmetric(
-                      horizontal: 0,
-                      vertical: 4,
-                    )),
-                  ],
+                      Padding(
+                          padding: EdgeInsets.symmetric(
+                        horizontal: 0,
+                        vertical: 4,
+                      )),
+                    ],
+                  ),
                 ),
-              ),
-              buildToggleButtons(0,3),
-              const Padding(padding: EdgeInsets.symmetric(
-                vertical: 8,
-                horizontal: 0
-              )),
-              buildToggleButtons(3,6),
-              const Padding(padding: EdgeInsets.symmetric(
+                buildToggleButtons(0,3),
+                const Padding(padding: EdgeInsets.symmetric(
                   vertical: 8,
                   horizontal: 0
-              )),
-              buildToggleButtons(6,9),
-              const Padding(padding: EdgeInsets.symmetric(
-                  vertical: 8,
-                  horizontal: 0
-              )),
-              buildToggleButtons(9,12),
-            ],
+                )),
+                buildToggleButtons(3,6),
+                const Padding(padding: EdgeInsets.symmetric(
+                    vertical: 8,
+                    horizontal: 0
+                )),
+                buildToggleButtons(6,9),
+                const Padding(padding: EdgeInsets.symmetric(
+                    vertical: 8,
+                    horizontal: 0
+                )),
+                buildToggleButtons(9,12),
+                Column(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(6),
+                      child: Column(
+                        children: [
+                          Align(
+                              alignment: Alignment.topLeft,
+                              child: Text(
+                                "Ingredients",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                ),
+                              )),
+                          Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 0,
+                                vertical: 4,
+                              )),
+                          Form(
+                              key: _formKey4,
+                              child: TextFormField(
+                                decoration: InputDecoration(
+                                    hintText: "Enter your ingredients here."),
+                                onChanged: (text) {
+                                  print('First text field: $text');
+                                },
+                                controller: ingredientController,
+                                keyboardType: TextInputType.name,
+                                onSaved: (value) {
+                                  ingredientController.text = value!;
+                                },
+                                textInputAction: TextInputAction.done,
+                                maxLines: 21,
+                                minLines: 20,
+                              )) //This is da real deal.
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -313,6 +349,24 @@ class _AddRecipeState extends State<AddRecipePage> {
       ),
     );
   }
+
+  void saveRecipe() {
+            recipeName = recipeNoteContoller.text;
+            recipeDescription = recipeDescriptionController.text;
+            recipeNotes = recipeNoteContoller.text;
+            recipeIngredient = ingredientController.text;
+            Recipe addRecipe = Recipe(
+              name: recipeName.toString(),
+              description: recipeDescription.toString(),
+              notes: recipeNotes.toString(),
+              selectedTags: addRecipeTags,
+              ingredients: recipeIngredient.toString()
+
+            );
+            print(
+                "Add this " + addRecipe.toString() + " object to firebase.");
+            print(addRecipe.selectedTags);
+          }
 
   ToggleButtons buildToggleButtons(int start, int end) {
     return ToggleButtons(
@@ -331,9 +385,9 @@ class _AddRecipeState extends State<AddRecipePage> {
         setState(() {
           selectedTags[i + start] = !selectedTags[i + start];
           if (selectedTags[i] == true) {
-            addRecipeTags.add(_AddRecipeState.tagList[i]);
+            addRecipeTags.add(_AddRecipeState.tagList[i+start]);
           } else if (selectedTags[i] == false) {
-            addRecipeTags.remove(_AddRecipeState.tagList[i]);
+            addRecipeTags.remove(_AddRecipeState.tagList[i+start]);
           }
         });
       },
