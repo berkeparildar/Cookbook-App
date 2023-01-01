@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:se380_project/add_recipe.dart';
 import 'package:se380_project/my_recipes.dart';
 import 'package:se380_project/tags.dart';
+import 'package:se380_project/favorites_page.dart';
 import 'package:se380_project/recipe.dart';
 
 
@@ -22,9 +23,14 @@ List<Widget> menuWidgetList = [
     recipeList: [],
     selectedIndex: 0,
   ),
-  Text("data"),
+  FavoritesPage(
+    recipeList: [
+    ],
+    selectedIndex: 1,
+  ),
   TagsPage(
     tagList: tags,
+    selectedIndex: 2,
   )
 ];
 

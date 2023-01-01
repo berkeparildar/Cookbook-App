@@ -9,7 +9,7 @@ import 'package:se380_project/recipe.dart';
 class TagsPage extends StatelessWidget {
   final List<String> tagList;
 
-  TagsPage({super.key, required this.tagList});
+  TagsPage({super.key, required this.tagList, required int selectedIndex});
 
   @override
   Widget build(BuildContext context) {

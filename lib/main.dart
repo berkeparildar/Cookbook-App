@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:se380_project/favorites_page.dart';
 import 'package:se380_project/my_recipes.dart';
 import 'add_recipe.dart';
 import 'package:se380_project/recipe.dart';
@@ -116,7 +117,8 @@ class _MyHomePageState extends State<MyHomePage> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => AddRecipePage()),
+                                  builder: (context) => FavoritesPage(recipeList: [],
+                                    selectedIndex: 2,)),
                             );
                           },
                           child: Row(
@@ -128,18 +130,22 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                         ),
                       ),
-                      ElevatedButton(
-                        onPressed: () {Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => TagsPage(tagList: tags,)),
-                        );},
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Text("Tags"),
-                            const Icon(Icons.tag_sharp),
-                          ],
+                      Padding(
+                        padding: EdgeInsets.all(4),
+                        child: ElevatedButton(
+                          onPressed: () {Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => TagsPage(tagList: tags,
+                                selectedIndex: 2,)),
+                          );},
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: const [
+                              Text("Tags"),
+                              Icon(Icons.tag_sharp),
+                            ],
+                          ),
                         ),
                       )
                     ],
