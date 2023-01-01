@@ -3,6 +3,7 @@ import 'package:se380_project/add_recipe.dart';
 import 'package:se380_project/bottom_bar.dart';
 import 'package:se380_project/my_recipes.dart';
 import 'package:se380_project/recipe.dart';
+import 'main.dart';
 
 
 
@@ -73,7 +74,7 @@ class TagsInList extends StatelessWidget {
             context,
             MaterialPageRoute(
                 builder: (context) => MyRecipes(
-                    recipeList: returnRecipeList(recipeList, tag),
+                    recipeList: returnRecipeList(MyHomePage.getRecipes(), tag),
                   selectedIndex: 2,
                 )),
           );

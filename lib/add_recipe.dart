@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:se380_project/bottom_bar.dart';
+import 'package:se380_project/main.dart';
 import 'recipe.dart';
 
 class AddRecipePage extends StatefulWidget {
@@ -85,14 +86,21 @@ class _AddRecipeState extends State<AddRecipePage> {
   final _formKey = GlobalKey<FormState>();
   final _formKey1 = GlobalKey<FormState>();
   final _formKey2 = GlobalKey<FormState>();
+  final _formKey4 = GlobalKey<FormState>();
+  final _formKey5 = GlobalKey<FormState>();
+  final _formKey6 = GlobalKey<FormState>();
+  final _formKey7 = GlobalKey<FormState>();
   final TextEditingController recipeNameController = TextEditingController();
   final TextEditingController recipeDescriptionController =
       TextEditingController();
   final TextEditingController recipeNoteContoller = TextEditingController();
-  final _formKey4 = GlobalKey<FormState>();
   final TextEditingController ingredientController = TextEditingController();
+  final TextEditingController methodController = TextEditingController();
+  final TextEditingController cookingTController = TextEditingController();
+  final TextEditingController preparingTController = TextEditingController();
 
-  String? recipeName, recipeDescription, recipeNotes,recipeIngredient;
+  String? recipeName, recipeDescription, recipeNotes,recipeIngredient,
+      recipeMethod, cookingTime, preparingTime;
 
 
 
@@ -330,9 +338,60 @@ class _AddRecipeState extends State<AddRecipePage> {
                                   ingredientController.text = value!;
                                 },
                                 textInputAction: TextInputAction.done,
-                                maxLines: 21,
-                                minLines: 20,
-                              )) //This is da real deal.
+                                maxLines: 17,
+                                minLines: 15,
+                              )),
+                          Form(
+                              key: _formKey6,
+                              child: TextFormField(
+                                decoration: InputDecoration(
+                                    hintText: "Enter the cooking time here"),
+                                onChanged: (text) {
+                                  print('First text field: $text');
+                                },
+                                controller: cookingTController,
+                                keyboardType: TextInputType.name,
+                                onSaved: (value) {
+                                  cookingTController.text = value!;
+                                },
+                                textInputAction: TextInputAction.done,
+                                maxLines: 10,
+                                minLines: 5,
+                              )),
+                          Form(
+                              key: _formKey7,
+                              child: TextFormField(
+                                decoration: InputDecoration(
+                                    hintText: "Enter the preparing time here."),
+                                onChanged: (text) {
+                                  print('First text field: $text');
+                                },
+                                controller: preparingTController,
+                                keyboardType: TextInputType.name,
+                                onSaved: (value) {
+                                  preparingTController.text = value!;
+                                },
+                                textInputAction: TextInputAction.done,
+                                maxLines: 10,
+                                minLines: 5,
+                              )),
+                          Form(
+                              key: _formKey5,
+                              child: TextFormField(
+                                decoration: InputDecoration(
+                                    hintText: "Enter your method here"),
+                                onChanged: (text) {
+                                  print('First text field: $text');
+                                },
+                                controller: methodController,
+                                keyboardType: TextInputType.name,
+                                onSaved: (value) {
+                                  methodController.text = value!;
+                                },
+                                textInputAction: TextInputAction.done,
+                                maxLines: 10,
+                                minLines: 5,
+                              ))
                         ],
                       ),
                     )
@@ -355,17 +414,24 @@ class _AddRecipeState extends State<AddRecipePage> {
             recipeDescription = recipeDescriptionController.text;
             recipeNotes = recipeNoteContoller.text;
             recipeIngredient = ingredientController.text;
+            recipeMethod = methodController.text;
+            cookingTime = cookingTController.text;
+            preparingTime = preparingTController.text;
             Recipe addRecipe = Recipe(
               name: recipeName.toString(),
               description: recipeDescription.toString(),
               notes: recipeNotes.toString(),
               selectedTags: addRecipeTags,
-              ingredients: recipeIngredient.toString()
+              ingredients: recipeIngredient.toString(),
+              method: recipeMethod.toString(),
+              cookingTime: cookingTController.text,
+              preparingTime: preparingTController.text,
 
             );
             print(
                 "Add this " + addRecipe.toString() + " object to firebase.");
             print(addRecipe.selectedTags);
+            MyHomePage.getRecipes().add(addRecipe);
           }
 
   ToggleButtons buildToggleButtons(int start, int end) {

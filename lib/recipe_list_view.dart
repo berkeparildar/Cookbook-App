@@ -52,7 +52,7 @@ class _RecipeListViewState extends State<RecipeListView> {
                           Row(
                             children: [
                               Text(
-                                widget.recipeList[index].description,
+                                widget.recipeList[index].cookingTime,
                                 style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 12,
@@ -67,7 +67,7 @@ class _RecipeListViewState extends State<RecipeListView> {
                               const Padding(padding: EdgeInsets.all(20)
                               ),
                               Text(
-                                widget.recipeList[index].notes,
+                                widget.recipeList[index].preparingTime,
                                 style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 12,

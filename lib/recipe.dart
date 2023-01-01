@@ -3,14 +3,20 @@ import 'package:flutter/material.dart';
 class Recipe {
   Recipe({required this.name, required this.description, required this.notes,
     required this.selectedTags,this.isFavorite = false,required this.ingredients,
-    this.method});
+    required this.method, required this.cookingTime, required this.preparingTime});
   final String name;
   final String description;
   final String notes;
   final List<String> selectedTags;
   bool isFavorite = true;
   final String ingredients;
-  String? method;
+  final String method;
+  final String cookingTime;
+  final String preparingTime;
+
+
 }
+
+
 
 

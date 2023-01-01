@@ -35,13 +35,31 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
-
+  static List<Recipe> getRecipes() {
+    return _MyHomePageState.recipes;
+  }
   @override
   State<MyHomePage> createState() => _MyHomePageState();
+
 }
 
 class _MyHomePageState extends State<MyHomePage> {
   List<String> tags = AddRecipePage.getTags();
+
+  static List<Recipe> recipes = [
+    Recipe(name: "Keskek", description: "good meal with good nutrients",
+        notes: "best when its hot", selectedTags: ["Turkish","Dinner"],
+        ingredients: "meat",method: "Its hard to do.", cookingTime: "3 Hours",
+    preparingTime: "1 hours"),
+
+    Recipe(name: "Fried Chicken", description: "Chicken that is fried. ",
+        notes: "Usually okay.", selectedTags: ["Lunch","Dinner"],
+        ingredients: "chicken", method: "Just fry it.", cookingTime: "10 minutes",
+    preparingTime: "2 minutes"),
+
+  ];
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -95,9 +113,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           onPressed: () {
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) => MyRecipes(
-                                      recipeList: [
-
-                                      ],
+                                      recipeList: recipes,
                                   selectedIndex: 0,
                                     )));
                           },
