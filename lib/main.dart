@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'add_recipe.dart';
 import 'recipe.dart';
+import 'tags.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,9 +19,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           elevatedButtonTheme: ElevatedButtonThemeData(
               style: ElevatedButton.styleFrom(
-            fixedSize: const Size(250, 40),
-            backgroundColor: Colors.grey.shade800,
-          )),
+                fixedSize: const Size(250, 40),
+                backgroundColor: Colors.grey.shade800,
+              )),
           inputDecorationTheme: InputDecorationTheme(
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
             filled: true,
@@ -39,6 +40,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  List<String> tags = AddRecipePage.getTags();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,12 +58,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   flex: 40,
                   child: Center(
                       child: Text(
-                    "COOKBOOK",
-                    style: TextStyle(
-                        fontFamily: "DancingScript",
-                        fontSize: 55,
-                        fontWeight: FontWeight.bold),
-                  )),
+                        "COOKBOOK",
+                        style: TextStyle(
+                            fontFamily: "DancingScript",
+                            fontSize: 55,
+                            fontWeight: FontWeight.bold),
+                      )),
                 ),
                 Expanded(
                   flex: 60,
@@ -99,6 +102,20 @@ class _MyHomePageState extends State<MyHomePage> {
                           children: [
                             const Text("Favourites"),
                             const Icon(Icons.favorite),
+                          ],
+                        ),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => TagsPage(tagList: tags,)),
+                        );},
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text("Tags"),
+                            const Icon(Icons.tag_sharp),
                           ],
                         ),
                       )

@@ -4,6 +4,10 @@ import 'recipe.dart';
 class AddRecipePage extends StatefulWidget {
   const AddRecipePage({super.key});
 
+  static List<String> getTags() {
+    return _AddRecipeState.tagList;
+  }
+
   @override
   _AddRecipeState createState() => _AddRecipeState();
 }
@@ -37,7 +41,7 @@ class _AddRecipeState extends State<AddRecipePage> {
     false,
     false
   ];
-  final List<String> tagList = <String>[
+  static final List<String> tagList = <String>[
     "Asian",
     "Breakfast",
     "Dinner",
@@ -276,31 +280,41 @@ class _AddRecipeState extends State<AddRecipePage> {
                   ],
                 ),
               ),
-              ToggleButtons(
-                constraints: const BoxConstraints(minHeight: 60, minWidth: 80),
-                color: Colors.white,
-                isSelected: selectedTags,
-                selectedColor: Colors.white,
-                borderColor: Colors.white,
-                borderRadius: BorderRadius.all(Radius.circular(8)),
-                fillColor: Colors.blueGrey,
-                selectedBorderColor: Colors.blueGrey,
-                onPressed: (int i) {
-                  setState(() {
-                    selectedTags[i] = !selectedTags[i];
-                    if (selectedTags[i] == true) {
-                      addRecipeTags.add(tagList[i]);
-                    } else if (selectedTags[i] == false) {
-                      addRecipeTags.remove(tagList[i]);
-                    }
-                  });
-                },
-                children: listOfTags,
-              )
+              buildToggleButtons()
+              /*ListView(
+                  children: List<Widget>.generate(
+                      tagList.length, (index) => buildToggleButtons())),*/
             ],
           ),
         ),
       ),
+    );
+  }
+
+  ToggleButtons buildToggleButtons() {
+    return ToggleButtons(
+      constraints: const BoxConstraints(
+        minHeight: 60,
+        minWidth: 80,
+      ),
+      color: Colors.white,
+      isSelected: selectedTags,
+      selectedColor: Colors.white,
+      borderColor: Colors.white,
+      borderRadius: BorderRadius.all(Radius.circular(8)),
+      fillColor: Colors.blueGrey,
+      selectedBorderColor: Colors.blueGrey,
+      onPressed: (int i) {
+        setState(() {
+          selectedTags[i] = !selectedTags[i];
+          if (selectedTags[i] == true) {
+            addRecipeTags.add(_AddRecipeState.tagList[i]);
+          } else if (selectedTags[i] == false) {
+            addRecipeTags.remove(_AddRecipeState.tagList[i]);
+          }
+        });
+      },
+      children: listOfTags,
     );
   }
 }
