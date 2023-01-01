@@ -27,21 +27,27 @@ class TagsPage extends StatelessWidget {
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           backgroundColor: Colors.grey.shade800,
-          title: Text("CookBook"),
-          titleTextStyle: TextStyle(
+          title: const Text("CookBook"),
+          titleTextStyle: const TextStyle(
             fontFamily: "DancingScript",
             fontSize: 35,
           ),
           centerTitle: true,
         ),
         bottomNavigationBar: BottomBar(
+          isInAddRecipe: false,
           selectedIndex: 2,
         ),
         body: DecoratedBox(
           decoration: BoxDecoration(color: Colors.grey.shade900),
-          child: GridView.count(
-            crossAxisCount: 2,
-            children: tagList.map((e) => TagsInList(tag: e)).toList(),
+          child: Padding(
+            padding: EdgeInsets.all(4),
+            child: GridView.count(
+              crossAxisCount: 2,
+              crossAxisSpacing: 4,
+              mainAxisSpacing: 4,
+              children: tagList.map((e) => TagsInList(tag: e)).toList(),
+            ),
           ),
         ));
   }
@@ -69,7 +75,6 @@ class TagsInList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        border: Border.all(width: 1, color: Colors.grey),
         borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
       child: ElevatedButton(
@@ -83,18 +88,10 @@ class TagsInList extends StatelessWidget {
                 )),
           );
         },
-        child: SizedBox(
-          height: 300,
-          width: 300,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                tag,
-                style: TextStyle(color: Colors.grey),
-              ),
-            ],
+        child: Center(
+          child: Text(
+            tag,
+            style: TextStyle(color: Colors.grey),
           ),
         ),
       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:se380_project/bottom_bar.dart';
 import 'recipe.dart';
 
 class AddRecipePage extends StatefulWidget {
@@ -186,7 +187,7 @@ class _AddRecipeState extends State<AddRecipePage> {
                 padding: EdgeInsets.all(6),
                 child: Column(
                   children: [
-                    Align(
+                    const Align(
                       alignment: Alignment.topLeft,
                       child: Text(
                         "Description",
@@ -226,7 +227,7 @@ class _AddRecipeState extends State<AddRecipePage> {
                 padding: EdgeInsets.all(6),
                 child: Column(
                   children: [
-                    Align(
+                    const Align(
                       alignment: Alignment.topLeft,
                       child: Text(
                         "Recipe Notes",
@@ -237,7 +238,7 @@ class _AddRecipeState extends State<AddRecipePage> {
                         ),
                       ),
                     ),
-                    Padding(
+                    const Padding(
                         padding: EdgeInsets.symmetric(
                       horizontal: 0,
                       vertical: 4,
@@ -245,7 +246,7 @@ class _AddRecipeState extends State<AddRecipePage> {
                     Form(
                       key: _formKey2,
                       child: TextFormField(
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           hintText: 'Best served with crusty garlic bread',
                           filled: true,
                         ),
@@ -287,17 +288,17 @@ class _AddRecipeState extends State<AddRecipePage> {
                 ),
               ),
               buildToggleButtons(0,3),
-              Padding(padding: EdgeInsets.symmetric(
+              const Padding(padding: EdgeInsets.symmetric(
                 vertical: 8,
                 horizontal: 0
               )),
               buildToggleButtons(3,6),
-              Padding(padding: EdgeInsets.symmetric(
+              const Padding(padding: EdgeInsets.symmetric(
                   vertical: 8,
                   horizontal: 0
               )),
               buildToggleButtons(6,9),
-              Padding(padding: EdgeInsets.symmetric(
+              const Padding(padding: EdgeInsets.symmetric(
                   vertical: 8,
                   horizontal: 0
               )),
@@ -305,6 +306,10 @@ class _AddRecipeState extends State<AddRecipePage> {
             ],
           ),
         ),
+      ),
+      bottomNavigationBar: BottomBar(
+        isInAddRecipe: true,
+        selectedIndex: 0,
       ),
     );
   }

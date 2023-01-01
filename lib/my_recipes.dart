@@ -65,7 +65,7 @@ class _MyRecipesState extends State<MyRecipes> {
                 keyboardType: TextInputType.name,
                 decoration: InputDecoration(
                  fillColor: Colors.grey.shade800,
-                  hintText: "Search by keywords..",
+                  hintText: "Search by name..",
                   hintStyle: TextStyle(
                     color: Colors.white,
                     fontSize: 14
@@ -98,6 +98,7 @@ class _MyRecipesState extends State<MyRecipes> {
       ),
       bottomNavigationBar: BottomBar(
         selectedIndex: widget.selectedIndex,
+        isInAddRecipe: false,
       ),
     );
   }
