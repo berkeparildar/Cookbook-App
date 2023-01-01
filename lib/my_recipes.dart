@@ -22,7 +22,7 @@ class _MyRecipesState extends State<MyRecipes> {
       }
       else {
         for(int i = 0; i < widget.recipeList.length; i++){
-          if (widget.recipeList[i].name.contains(searchController.text, 0)){
+          if (widget.recipeList[i].name.toLowerCase().contains(searchController.text, 0)){
             List<Recipe> temp = [];
             temp.add(widget.recipeList[i]);
             toReturn = RecipeListView(recipeList: temp);
