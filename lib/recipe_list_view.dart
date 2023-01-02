@@ -26,15 +26,21 @@ class _RecipeListViewState extends State<RecipeListView> {
         child: Row(
           children: [
             Expanded(
-                flex: 20,
-                child: AspectRatio(
-                  aspectRatio: 1,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
-                    child: Image.asset("Assets/images/food1.jpg",
-                        fit: BoxFit.cover),
+              flex: 20,
+              child: AspectRatio(
+                aspectRatio: 1,
+                child: Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(
+                        "Assets/images/food1.jpg",
+                      ),
+                      fit: BoxFit.cover
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(8))
                   ),
-                )
+                    ),
+              ),
             ),
             Expanded(
                 flex: 80,
