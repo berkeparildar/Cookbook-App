@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:se380_project/favorites_page.dart';
 import 'package:se380_project/recipe.dart';
+
+import 'main.dart';
 
 class RecipeInspect extends StatefulWidget {
   const RecipeInspect({Key? key, required this.recipe}) : super(key: key);
@@ -12,12 +15,22 @@ class RecipeInspect extends StatefulWidget {
 
 class _RecipeInspectState extends State<RecipeInspect> {
 
-  void checkFavorite(Recipe r){
-    if (r.isFavorite != true ){
-      r.isFavorite = true;
+  void checkFavorite(List <Recipe> arr) {
+    if (widget.recipe.isFavorite != true ){
+      widget.recipe.isFavorite = true;
+      for (int i = 0; i < arr.length; i++){
+        if (arr[i] == widget.recipe){
+          arr[i].isFavorite = true;
+        }
+      }
     }
     else {
-      r.isFavorite = false;
+      widget.recipe.isFavorite = false;
+      for (int i = 0; i < arr.length; i++){
+        if (arr[i] == widget.recipe){
+          arr[i].isFavorite = false;
+        }
+      }
     }
   }
   Icon getIcon(bool a){
@@ -53,7 +66,7 @@ class _RecipeInspectState extends State<RecipeInspect> {
             style: TextButton.styleFrom(foregroundColor: Colors.white),
             onPressed: () {
               setState(() {
-                checkFavorite(widget.recipe);
+                checkFavorite(MyHomePage.getRecipes());
                 someIcon = getIcon(widget.recipe.isFavorite);
               });
             },
@@ -158,7 +171,7 @@ class _RecipeInspectState extends State<RecipeInspect> {
           ),
           Wrap(
             children: List<Widget>.generate(widget.recipe.selectedTags.length, (index) => Text(
-                arr[index] + " ",
+                widget.recipe.selectedTags[index] + " ",
               style: TextStyle(
                 color: Colors.white,
               ),

@@ -3,6 +3,8 @@ import 'package:se380_project/bottom_bar.dart';
 import 'package:se380_project/recipe.dart';
 import 'package:se380_project/recipe_list_view.dart';
 
+import 'main.dart';
+
 class MyRecipes extends StatefulWidget {
   const MyRecipes({Key? key, required this.recipeList, required this.selectedIndex}) : super(key: key,);
   final List<Recipe> recipeList;
@@ -44,6 +46,18 @@ class _MyRecipesState extends State<MyRecipes> {
     Widget x = check();
     return Scaffold(
       appBar: AppBar(
+        leading: TextButton(
+          onPressed: () {
+            setState(() {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => MyHomePage()),
+              );
+            });
+          }, child: Icon(Icons.arrow_back,
+          color: Colors.white,),
+        ),
         backgroundColor: Colors.grey.shade800,
         title: const Text("CookBook"),
         titleTextStyle: const TextStyle(

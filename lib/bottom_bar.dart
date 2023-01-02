@@ -5,6 +5,8 @@ import 'package:se380_project/tags.dart';
 import 'package:se380_project/favorites_page.dart';
 import 'package:se380_project/recipe.dart';
 
+import 'main.dart';
+
 
 class BottomBar extends StatefulWidget {
   BottomBar({Key? key, required this.selectedIndex, required this.isInAddRecipe}) : super(key: key);
@@ -20,12 +22,11 @@ List<String> addTags = ["About", "Ingredients", "Method"];
 List<Icon> recipeIcons = [const Icon(Icons.newspaper), const Icon(Icons.shopping_bag_outlined), const Icon(Icons.format_list_bulleted)];
 List<Widget> menuWidgetList = [
   MyRecipes(
-    recipeList: [],
+    recipeList: MyHomePage.getRecipes(),
     selectedIndex: 0,
   ),
   FavoritesPage(
-    recipeList: [
-    ],
+    recipeList: MyHomePage.getRecipes(),
     selectedIndex: 1,
   ),
   TagsPage(

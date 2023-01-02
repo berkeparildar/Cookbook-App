@@ -411,7 +411,7 @@ class _AddRecipeState extends State<AddRecipePage> {
   }
 
   void saveRecipe() {
-            recipeName = recipeNoteContoller.text;
+            recipeName = recipeNameController.text;
             recipeDescription = recipeDescriptionController.text;
             recipeNotes = recipeNoteContoller.text;
             recipeIngredient = ingredientController.text;

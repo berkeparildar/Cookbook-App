@@ -4,6 +4,8 @@ import 'package:se380_project/main.dart';
 import 'package:se380_project/recipe.dart';
 import 'package:se380_project/recipe_list_view.dart';
 
+import 'bottom_bar.dart';
+
 class FavoritesPage extends StatefulWidget {
   FavoritesPage({Key? key, required this.recipeList, required this.selectedIndex}) : super(key: key);
   final int selectedIndex;
@@ -35,10 +37,11 @@ class _FavoritesPageState extends State<FavoritesPage> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => MyHomePage()),
+                    builder: (context) => const MyHomePage()),
               );
             });
-          }, child: Icon(Icons.arrow_back),
+          }, child: Icon(Icons.arrow_back,
+        color: Colors.white,),
         ),
         backgroundColor: Colors.grey.shade800,
         title: const Text("CookBook"),
@@ -49,6 +52,10 @@ class _FavoritesPageState extends State<FavoritesPage> {
         centerTitle: true,
 
       ),
+        bottomNavigationBar: BottomBar(
+          isInAddRecipe: false,
+          selectedIndex: 1,
+        ),
         body: DecoratedBox(
           decoration: BoxDecoration(
             color: Colors.grey.shade900,

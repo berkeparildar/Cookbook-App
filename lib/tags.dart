@@ -7,16 +7,33 @@ import 'main.dart';
 
 
 
-class TagsPage extends StatelessWidget {
+class TagsPage extends StatefulWidget {
   final List<String> tagList;
 
   TagsPage({super.key, required this.tagList, required int selectedIndex});
 
   @override
+  State<TagsPage> createState() => _TagsPageState();
+}
+
+class _TagsPageState extends State<TagsPage> {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
+          leading: TextButton(
+            onPressed: () {
+              setState(() {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const MyHomePage()),
+                );
+              });
+            }, child: Icon(Icons.arrow_back,
+            color: Colors.white,),
+          ),
           backgroundColor: Colors.grey.shade800,
           title: const Text("CookBook"),
           titleTextStyle: const TextStyle(
@@ -37,7 +54,7 @@ class TagsPage extends StatelessWidget {
               crossAxisCount: 2,
               crossAxisSpacing: 4,
               mainAxisSpacing: 4,
-              children: tagList.map((e) => TagsInList(tag: e)).toList(),
+              children: widget.tagList.map((e) => TagsInList(tag: e)).toList(),
             ),
           ),
         ));
