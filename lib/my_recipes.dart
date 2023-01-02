@@ -45,6 +45,8 @@ class _MyRecipesState extends State<MyRecipes> {
   Widget build(BuildContext context) {
     Widget x = check();
     return Scaffold(
+      backgroundColor: Colors.grey.shade900,
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         leading: TextButton(
           onPressed: () {
@@ -66,48 +68,51 @@ class _MyRecipesState extends State<MyRecipes> {
         ),
         centerTitle: true,
       ),
-      body: DecoratedBox(
-        decoration: BoxDecoration(
-          color: Colors.grey.shade900,
-        ),
-        child: Column(
-          children: [
-            Form(
-              key: _formKey,
-              child: TextFormField(
-                controller: searchController,
-                keyboardType: TextInputType.name,
-                decoration: InputDecoration(
-                 fillColor: Colors.grey.shade800,
-                  hintText: "Search by name..",
-                  hintStyle: TextStyle(
-                    color: Colors.white,
-                    fontSize: 14
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            color: Colors.grey.shade900,
+          ),
+          child: Column(
+            children: [
+              Form(
+                key: _formKey,
+                child: TextFormField(
+                  controller: searchController,
+                  keyboardType: TextInputType.name,
+                  decoration: InputDecoration(
+                   fillColor: Colors.grey.shade800,
+                    hintText: "Search by name..",
+                    hintStyle: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14
+                    ),
+                    contentPadding: EdgeInsets.all(12),
+                    constraints: BoxConstraints(
+                      maxHeight: 30
+                    )
                   ),
-                  contentPadding: EdgeInsets.all(12),
-                  constraints: BoxConstraints(
-                    maxHeight: 30
-                  )
-                ),
-                onSaved: (value) {
-                  searchController.text = value!;
-                },
-                onChanged: (value) {
-                  print("written $value");
-                  setState(() {
-                  });
-                },
-              ),
-            ),
-            Container(
-              color: Colors.white,
-              width: double.infinity,
-              child: Center(
-                child: a,
+                  onSaved: (value) {
+                    searchController.text = value!;
+                  },
+                  onChanged: (value) {
+                    print("written $value");
+                    setState(() {
+                    });
+                  },
                 ),
               ),
-            x,
-          ],
+              Container(
+                color: Colors.white,
+                width: double.infinity,
+                child: Center(
+                  child: a,
+                  ),
+                ),
+              x,
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: BottomBar(

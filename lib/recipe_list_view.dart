@@ -20,7 +20,7 @@ class _RecipeListViewState extends State<RecipeListView> {
         onPressed: () {
           Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => RecipeInspect(
-                recipe: widget.recipeList[index],
+                recipe: widget.recipeList[index]
               )));
         },
         child: Row(
