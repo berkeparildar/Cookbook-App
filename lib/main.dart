@@ -121,7 +121,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: const [
-                              Text("My Recipes"),
+                              Text("My recipes"),
                               Icon(Icons.search),
                             ],
                           ),
