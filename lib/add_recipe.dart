@@ -12,7 +12,6 @@ class AddRecipePage extends StatefulWidget {
 
   @override
   _AddRecipeState createState() => _AddRecipeState();
-
 }
 
 const List<Widget> listOfTags = <Widget>[
@@ -47,8 +46,6 @@ class _AddRecipeState extends State<AddRecipePage> {
     false
   ];
 
-
-
   static final List<String> tagList = <String>[
     "Asian",
     "Breakfast",
@@ -73,7 +70,6 @@ class _AddRecipeState extends State<AddRecipePage> {
 
   @override
   void dispose() {
-
     myController.dispose();
     super.dispose();
   }
@@ -90,6 +86,8 @@ class _AddRecipeState extends State<AddRecipePage> {
   final _formKey5 = GlobalKey<FormState>();
   final _formKey6 = GlobalKey<FormState>();
   final _formKey7 = GlobalKey<FormState>();
+  final _formKey8 = GlobalKey<FormState>();
+  final _formKey9 = GlobalKey<FormState>();
   final TextEditingController recipeNameController = TextEditingController();
   final TextEditingController recipeDescriptionController =
       TextEditingController();
@@ -98,15 +96,21 @@ class _AddRecipeState extends State<AddRecipePage> {
   final TextEditingController methodController = TextEditingController();
   final TextEditingController cookingTController = TextEditingController();
   final TextEditingController preparingTController = TextEditingController();
+  final TextEditingController preparingHController = TextEditingController();
+  final TextEditingController preparingMController = TextEditingController();
 
-  String? recipeName, recipeDescription, recipeNotes,recipeIngredient,
-      recipeMethod, cookingTime, preparingTime;
-
-
+  String? recipeName,
+      recipeDescription,
+      recipeNotes,
+      recipeIngredient,
+      recipeMethod,
+      cookingTime,
+      preparingTime,
+      preparingH,
+      preparingM;
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
@@ -287,22 +291,16 @@ class _AddRecipeState extends State<AddRecipePage> {
                     ],
                   ),
                 ),
-                buildToggleButtons(0,3),
-                const Padding(padding: EdgeInsets.symmetric(
-                  vertical: 8,
-                  horizontal: 0
-                )),
-                buildToggleButtons(3,6),
-                const Padding(padding: EdgeInsets.symmetric(
-                    vertical: 8,
-                    horizontal: 0
-                )),
-                buildToggleButtons(6,9),
-                const Padding(padding: EdgeInsets.symmetric(
-                    vertical: 8,
-                    horizontal: 0
-                )),
-                buildToggleButtons(9,12),
+                buildToggleButtons(0, 3),
+                const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 8, horizontal: 0)),
+                buildToggleButtons(3, 6),
+                const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 8, horizontal: 0)),
+                buildToggleButtons(6, 9),
+                const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 8, horizontal: 0)),
+                buildToggleButtons(9, 12),
                 Column(
                   children: [
                     Padding(
@@ -321,9 +319,9 @@ class _AddRecipeState extends State<AddRecipePage> {
                               )),
                           Padding(
                               padding: EdgeInsets.symmetric(
-                                horizontal: 0,
-                                vertical: 4,
-                              )),
+                            horizontal: 0,
+                            vertical: 4,
+                          )),
                           Form(
                               key: _formKey4,
                               child: TextFormField(
@@ -392,7 +390,42 @@ class _AddRecipeState extends State<AddRecipePage> {
                                 maxLines: 10,
                                 minLines: 3,
                               )),
-
+                          Form(
+                              key: _formKey8,
+                              child: TextFormField(
+                                decoration: InputDecoration(
+                                    hintText:
+                                        "Enter the preparing time in hours."),
+                                onChanged: (text) {
+                                  print('First text field: $text');
+                                },
+                                controller: preparingHController,
+                                keyboardType: TextInputType.name,
+                                onSaved: (value) {
+                                  preparingHController.text = value!;
+                                },
+                                textInputAction: TextInputAction.done,
+                                maxLines: 10,
+                                minLines: 3,
+                              )),
+                          Form(
+                              key: _formKey9,
+                              child: TextFormField(
+                                decoration: InputDecoration(
+                                    hintText:
+                                        "Enter the preparing time in minutes."),
+                                onChanged: (text) {
+                                  print('First text field: $text');
+                                },
+                                controller: preparingMController,
+                                keyboardType: TextInputType.name,
+                                onSaved: (value) {
+                                  preparingMController.text = value!;
+                                },
+                                textInputAction: TextInputAction.done,
+                                maxLines: 10,
+                                minLines: 3,
+                              )),
                         ],
                       ),
                     )
@@ -411,29 +444,34 @@ class _AddRecipeState extends State<AddRecipePage> {
   }
 
   void saveRecipe() {
-            recipeName = recipeNameController.text;
-            recipeDescription = recipeDescriptionController.text;
-            recipeNotes = recipeNoteContoller.text;
-            recipeIngredient = ingredientController.text;
-            recipeMethod = methodController.text;
-            cookingTime = cookingTController.text;
-            preparingTime = preparingTController.text;
-            Recipe addRecipe = Recipe(
-              name: recipeName.toString(),
-              description: recipeDescription.toString(),
-              notes: recipeNotes.toString(),
-              selectedTags: addRecipeTags,
-              ingredients: recipeIngredient.toString(),
-              method: recipeMethod.toString(),
-              cookingTime: cookingTController.text,
-              preparingTime: preparingTController.text,
+    recipeName = recipeNameController.text;
+    recipeDescription = recipeDescriptionController.text;
+    recipeNotes = recipeNoteContoller.text;
+    recipeIngredient = ingredientController.text;
+    recipeMethod = methodController.text;
+    cookingTime = cookingTController.text;
+    preparingTime = preparingTController.text;
+    preparingH = preparingHController.text;
+    preparingM = preparingMController.text;
 
-            );
-            print(
-                "Add this " + addRecipe.toString() + " object to firebase.");
-            print(addRecipe.selectedTags);
-            MyHomePage.getRecipes().add(addRecipe);
-          }
+    Recipe addRecipe = Recipe(
+        name: recipeName.toString(),
+        description: recipeDescription.toString(),
+        notes: recipeNotes.toString(),
+        selectedTags: addRecipeTags,
+        ingredients: recipeIngredient.toString(),
+        method: recipeMethod.toString(),
+        cookingTime: cookingTController.text,
+        preparingTime: preparingTController.text,
+
+        hours: int.parse(preparingH.toString()),
+        minutes: int.parse(preparingM.toString()),
+        seconds: 0
+    );
+    print("Add this " + addRecipe.toString() + " object to firebase.");
+    print(addRecipe.selectedTags);
+    MyHomePage.getRecipes().add(addRecipe);
+  }
 
   ToggleButtons buildToggleButtons(int start, int end) {
     return ToggleButtons(
@@ -452,13 +490,13 @@ class _AddRecipeState extends State<AddRecipePage> {
         setState(() {
           selectedTags[i + start] = !selectedTags[i + start];
           if (selectedTags[i + start] == true) {
-            addRecipeTags.add(_AddRecipeState.tagList[i+start]);
+            addRecipeTags.add(_AddRecipeState.tagList[i + start]);
           } else if (selectedTags[i + start] == false) {
-            addRecipeTags.remove(_AddRecipeState.tagList[i+start]);
+            addRecipeTags.remove(_AddRecipeState.tagList[i + start]);
           }
         });
       },
-      children: listOfTags.sublist(start,end),
+      children: listOfTags.sublist(start, end),
     );
   }
 }

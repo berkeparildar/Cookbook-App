@@ -51,12 +51,12 @@ class _MyHomePageState extends State<MyHomePage> {
     Recipe(name: "Keskek", description: "good meal with good nutrients",
         notes: "best when its hot", selectedTags: ["Turkish","Dinner"],
         ingredients: "meat",method: "Its hard to do.", cookingTime: "3 Hours",
-    preparingTime: "1 hours"),
+    preparingTime: "1 hours",hours: 0,minutes: 0,seconds: 5),
 
     Recipe(name: "Fried Chicken", description: "Chicken that is fried. ",
         notes: "Usually okay.", selectedTags: ["Lunch","Dinner"],
         ingredients: "chicken", method: "Just fry it.", cookingTime: "10 minutes",
-    preparingTime: "2 minutes"),
+    preparingTime: "2 minutes", hours: 0, minutes: 1,seconds: 6),
 
   ];
 
