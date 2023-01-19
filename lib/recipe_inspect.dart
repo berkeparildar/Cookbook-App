@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:se380_project/favorites_page.dart';
 import 'package:se380_project/recipe.dart';
+import 'package:se380_project/recipe_carousel.dart';
 
 import 'main.dart';
 
@@ -81,7 +82,7 @@ class _RecipeInspectState extends State<RecipeInspect> {
         scrollDirection: Axis.vertical,
         child: Column(
           children: [
-            Image(
+            const Image(
               image: AssetImage("Assets/images/food1.jpg"),
             ),
             SizedBox(
@@ -90,20 +91,23 @@ class _RecipeInspectState extends State<RecipeInspect> {
               child: DecoratedBox(
                 decoration: BoxDecoration(color: Colors.grey.shade800),
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 0, vertical: 4),
+                  padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 4),
                   child: Column(
                     children: [
                       Center(
                         child: Text(
                           widget.recipe.name,
-                          style: TextStyle(color: Colors.white, fontSize: 20),
+                          style: const TextStyle(color: Colors.white, fontSize: 20),
                         ),
                       ),
                       Center(
                         child: Padding(
-                          padding: EdgeInsets.all(8),
+                          padding: const EdgeInsets.all(8),
                           child: TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => RecipeCarousel(recipe: widget.recipe)));
+                            },
                             child: const Icon(
                               Icons.play_arrow,
                               color: Colors.blueGrey,
@@ -117,10 +121,10 @@ class _RecipeInspectState extends State<RecipeInspect> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.all(24),
+              padding: const EdgeInsets.all(24),
               child: Row(
                 children: [
-                  Expanded(
+                  const Expanded(
                       flex: 50,
                       child: Center(
                         child: Text(
@@ -133,7 +137,7 @@ class _RecipeInspectState extends State<RecipeInspect> {
                       child: Center(
                         child: Text(
                           ("Prep: $prepTime"),
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 16,
                           ),
@@ -167,11 +171,11 @@ class _RecipeInspectState extends State<RecipeInspect> {
                 ),
               ),
             ),
-            SizedBox(
-              child: myTimer,
-              height: 250,
-              width: double.infinity,
-            ),
+            // SizedBox(
+            //   child: myTimer,
+            //   height: 250,
+            //   width: double.infinity,
+            // ),
           ],
         ),
       ),
