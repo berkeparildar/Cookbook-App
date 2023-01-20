@@ -23,7 +23,8 @@ class _RecipeListViewState extends State<RecipeListView> {
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) =>
-                      RecipeInspect(recipe: widget.recipeList[index])));
+                      RecipeInspect(
+                          recipe: widget.recipeList[index])));
             },
             child: Row(
               children: [
@@ -32,7 +33,7 @@ class _RecipeListViewState extends State<RecipeListView> {
                   child: AspectRatio(
                     aspectRatio: 1,
                     child: Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           image: DecorationImage(
                               image: AssetImage(
                                 "Assets/images/food1.jpg",

@@ -45,13 +45,10 @@ class _RecipeInspectState extends State<RecipeInspect> {
   }
 
   List<String> arr = ["Breakfast ", "Healthy ", "Lunch "];
-  MyTimer myTimer = MyTimer(timerSeconds: 0, timerHours: 0, timerMinutes: 0);
 
   @override
   Widget build(BuildContext context) {
-    myTimer.setSecond(widget.recipe.seconds);
-    myTimer.setMinute(widget.recipe.minutes);
-    myTimer.setHour(widget.recipe.hours);
+
 
     String prepTime = widget.recipe.preparingTime;
     String cookTime = widget.recipe.cookingTime;
@@ -183,124 +180,3 @@ class _RecipeInspectState extends State<RecipeInspect> {
   }
 }
 
-class MyTimer extends StatefulWidget {
-  int timerSeconds;
-  int timerMinutes;
-  int timerHours;
-
-  void setSecond(int pSecond) {
-    timerSeconds = pSecond;
-  }
-  void setMinute(int pMinute) {
-    timerMinutes = pMinute;
-  }
-  void setHour(int pHour) {
-    timerHours = pHour;
-  }
-
-   MyTimer({super.key, required this.timerSeconds, required this.timerMinutes,
-   required this.timerHours});
-
-  @override
-  State<StatefulWidget> createState() => _MyTimerState();
-}
-
-class _MyTimerState extends State<MyTimer> {
-  Timer? countdownTimer;
-  Duration myDuration = Duration(hours: 0, minutes: 0, seconds: 0);
-
-  @override
-  void initState() {
-    myDuration = Duration(hours: widget.timerHours,minutes: widget.timerMinutes,
-    seconds: widget.timerSeconds);
-    super.initState();
-  }
-
-  void startTimer() {
-    countdownTimer =
-        Timer.periodic(Duration(seconds: 1), (_) => setCountDown());
-  }
-
-  void setCountDown() {
-    final reduceSec = 1;
-    setState(() {
-      final seconds = myDuration.inSeconds - reduceSec;
-      if (seconds < 0) {
-        countdownTimer!.cancel();
-      } else {
-        myDuration = Duration(seconds: seconds);
-      }
-    });
-  }
-
-  void stopTimer() {
-    setState(() => countdownTimer!.cancel());
-  }
-
-  void resetTimer() {
-    stopTimer();
-    setState(() {
-      myDuration = Duration(hours: widget.timerHours,minutes: widget.timerMinutes,
-          seconds: widget.timerSeconds);
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    String strDigits(int n) => n.toString().padLeft(2, '0');
-    final hours = strDigits(myDuration.inHours.remainder(24));
-    final minutes = strDigits(myDuration.inMinutes.remainder(60));
-    final seconds = strDigits(myDuration.inSeconds.remainder(60));
-
-    return Expanded(
-        child: Center(
-      child: Column(
-        children: [
-          SizedBox(
-            height: 40,
-          ),
-          Text(
-            '$hours:$minutes:$seconds',
-            style: TextStyle(
-                fontWeight: FontWeight.bold, color: Colors.white, fontSize: 50),
-          ),
-          SizedBox(
-            height: 1,
-          ),
-          ElevatedButton(
-            onPressed: startTimer,
-            child: Text(
-              'start',
-              style: TextStyle(
-                fontSize: 30,
-              ),
-            ),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              if (countdownTimer == null || countdownTimer!.isActive) {
-                stopTimer();
-              }
-            },
-            child: Text(
-              'Stop',
-              style: TextStyle(
-                fontSize: 30,
-              ),
-            ),
-          ),
-          ElevatedButton(
-              onPressed: () {
-                resetTimer();
-              },
-              child: Text(
-                'Reset',
-                style: TextStyle(
-                  fontSize: 30,
-                ),
-              ))
-        ],
-      ),
-    ));
-  }
-}
