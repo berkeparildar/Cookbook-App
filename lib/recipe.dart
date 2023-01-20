@@ -4,7 +4,9 @@ class Recipe {
   Recipe({required this.name, required this.description, required this.notes,
     required this.selectedTags,this.isFavorite = false,required this.ingredients,
     required this.method, required this.cookingTime, required this.preparingTime,
-      required this.hours, required this.minutes, required this.seconds});
+      required this.hours, required this.minutes, required this.seconds
+        });
+
   final String name;
   final String description;
   final String notes;
@@ -18,6 +20,9 @@ class Recipe {
   final int hours;
   final int minutes;
   final int seconds;
+
+
+
 
 
 }
