@@ -1,7 +1,11 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:se380_project/bottom_bar.dart';
 import 'package:se380_project/main.dart';
 import 'package:se380_project/recipe.dart';
+import 'camera.dart';
+import 'dart:io';
+
 
 class AddRecipePage extends StatefulWidget {
   const AddRecipePage({super.key});
@@ -28,6 +32,7 @@ const List<Widget> listOfTags = <Widget>[
   Text("Lunch"),
   Text("Snacks")
 ];
+
 
 class _AddRecipeState extends State<AddRecipePage> {
   final myController = TextEditingController();
@@ -99,6 +104,7 @@ class _AddRecipeState extends State<AddRecipePage> {
   final TextEditingController preparingHController = TextEditingController();
   final TextEditingController preparingMController = TextEditingController();
 
+
   String? recipeName,
       recipeDescription,
       recipeNotes,
@@ -108,6 +114,10 @@ class _AddRecipeState extends State<AddRecipePage> {
       preparingTime,
       preparingH,
       preparingM;
+
+  //Image recipePic = Image.file(new File("Assets/images/tag_images/asian.jpg"));
+  Image? recipePic;
+
 
   @override
   Widget build(BuildContext context) {
@@ -426,6 +436,26 @@ class _AddRecipeState extends State<AddRecipePage> {
                                 maxLines: 10,
                                 minLines: 3,
                               )),
+                          Align(
+                              alignment: Alignment.topLeft,
+                              child: Text(
+                                "Add Photo",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                ),
+                              )),
+                          Column(mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              ElevatedButton(
+                                  onPressed: () {
+                                    cameraScreen(recipePic, context);
+
+                                  }, child: Icon(Icons.camera)),
+                            ],
+                          ),
+
                         ],
                       ),
                     )
@@ -463,12 +493,12 @@ class _AddRecipeState extends State<AddRecipePage> {
         method: recipeMethod.toString(),
         cookingTime: cookingTController.text,
         preparingTime: preparingTController.text,
-
         hours: int.parse(preparingH.toString()),
         minutes: int.parse(preparingM.toString()),
-        seconds: 0
-    );
+        seconds: 0,
+        );
     print("Add this " + addRecipe.toString() + " object to firebase.");
+    print("The picture is saved too its reference is "+ recipePic.toString());
     print(addRecipe.selectedTags);
     MyHomePage.getRecipes().add(addRecipe);
   }
