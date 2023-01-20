@@ -17,9 +17,27 @@ class _RecipeCarouselState extends State<RecipeCarousel> {
   @override
   Widget build(BuildContext context) {
     MyTimer myTimer = MyTimer(timerSeconds: 0, timerHours: 0, timerMinutes: 0);
-    myTimer.setSecond(widget.recipe.seconds);
-    myTimer.setMinute(widget.recipe.minutes);
-    myTimer.setHour(widget.recipe.hours);
+
+    String generateHour(String pHour, String pWholeTime) {
+      pHour = pWholeTime.substring(0, 2);
+
+      return pHour;
+    }
+
+    String generateMin(String pMin, String pWholeTime) {
+      pMin = pWholeTime.substring(2,4);
+
+      return pMin;
+    }
+    String hour="", min="";
+
+    hour = generateHour(hour, widget.recipe.preparingTime);
+    min = generateMin(min, widget.recipe.preparingTime);
+    myTimer.setSecond(0);
+    //myTimer.setMinute(widget.recipe.minutes);
+    //myTimer.setHour(widget.recipe.hours);
+    myTimer.setMinute(int.parse(min));
+    myTimer.setHour(int.parse(hour));
     return MaterialApp(
       theme: ThemeData(
           iconTheme: const IconThemeData(color: Colors.white),
@@ -50,23 +68,20 @@ class _RecipeCarouselState extends State<RecipeCarousel> {
         ),
         body: CarouselPage(recipe: widget.recipe),
         bottomNavigationBar: DecoratedBox(
-          decoration: BoxDecoration(
-            color: Colors.grey.shade800
-          ),
-          child:  ElevatedButton(
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(Colors.grey.shade800),
-            ),
+          decoration: BoxDecoration(color: Colors.grey.shade800),
+          child: ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor:
+                    MaterialStateProperty.all(Colors.grey.shade800),
+              ),
               onPressed: () {
                 showDialog(
                     context: context,
-                    builder: (BuildContext context) =>
-                        SimpleDialog(
+                    builder: (BuildContext context) => SimpleDialog(
                           title: Text("Timer"),
                           children: [myTimer],
                           backgroundColor: Colors.grey.shade700,
                           alignment: Alignment.center,
-
                         ));
               },
               child: Icon(Icons.timer)),
@@ -151,12 +166,11 @@ class CarouselPage extends StatelessWidget {
             4,
             (index) => DecoratedBox(
                 decoration: BoxDecoration(color: Colors.grey.shade800),
-                child: Column(
-                    children: [
-                      Center(
-                        child: Text('${index + 1}.'),
-                      ),
-                    ]))),
+                child: Column(children: [
+                  Center(
+                    child: Text('${index + 1}.'),
+                  ),
+                ]))),
       ],
     );
   }
@@ -198,7 +212,7 @@ class _MyTimerState extends State<MyTimer> {
     myDuration = Duration(
         hours: widget.timerHours,
         minutes: widget.timerMinutes,
-        seconds: widget.timerSeconds);
+        seconds: 0);
     super.initState();
   }
 

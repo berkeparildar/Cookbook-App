@@ -113,7 +113,8 @@ class _AddRecipeState extends State<AddRecipePage> {
       cookingTime,
       preparingTime,
       preparingH,
-      preparingM;
+      preparingM,
+      preparingTimeHour, preparingTimeMin;
 
   //Image recipePic = Image.file(new File("Assets/images/tag_images/asian.jpg"));
   Image? recipePic;
@@ -400,7 +401,7 @@ class _AddRecipeState extends State<AddRecipePage> {
                                 maxLines: 10,
                                 minLines: 3,
                               )),
-                          Form(
+                          /*Form(
                               key: _formKey8,
                               child: TextFormField(
                                 decoration: InputDecoration(
@@ -435,7 +436,7 @@ class _AddRecipeState extends State<AddRecipePage> {
                                 textInputAction: TextInputAction.done,
                                 maxLines: 10,
                                 minLines: 3,
-                              )),
+                              ))*/
                           Align(
                               alignment: Alignment.topLeft,
                               child: Text(
@@ -484,6 +485,12 @@ class _AddRecipeState extends State<AddRecipePage> {
     preparingH = preparingHController.text;
     preparingM = preparingMController.text;
 
+
+    preparingTimeHour = preparingTime.toString().substring(0,2);
+    preparingTimeMin = preparingTime.toString().substring(2,4);
+
+
+
     Recipe addRecipe = Recipe(
         name: recipeName.toString(),
         description: recipeDescription.toString(),
@@ -493,8 +500,8 @@ class _AddRecipeState extends State<AddRecipePage> {
         method: recipeMethod.toString(),
         cookingTime: cookingTController.text,
         preparingTime: preparingTController.text,
-        hours: int.parse(preparingH.toString()),
-        minutes: int.parse(preparingM.toString()),
+        hours: int.parse(preparingTimeHour.toString()),
+        minutes: int.parse(preparingTimeMin.toString()),
         seconds: 0,
         );
     print("Add this " + addRecipe.toString() + " object to firebase.");

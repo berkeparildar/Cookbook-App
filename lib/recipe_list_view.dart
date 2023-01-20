@@ -12,6 +12,15 @@ class RecipeListView extends StatefulWidget {
 }
 
 class _RecipeListViewState extends State<RecipeListView> {
+  String min = "", hour = "", wholeTime = "";
+  String generateTime(String pMin, String pHour, String pWholeTime) {
+
+    pHour = pWholeTime.substring(0,2);
+    pMin = pWholeTime.substring(2,4);
+    pWholeTime = pHour + "Hours "+pMin+" Minutes ";
+    pWholeTime = pHour + "Hours "+pMin+" Minutes ";
+    return pWholeTime;
+}
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -75,7 +84,8 @@ class _RecipeListViewState extends State<RecipeListView> {
                                   ),
                                   const Padding(padding: EdgeInsets.all(20)),
                                   Text(
-                                    widget.recipeList[index].preparingTime,
+                                    //widget.recipeList[index].preparingTime,
+                                    generateTime(min, hour, widget.recipeList[index].preparingTime),
                                     style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 12,

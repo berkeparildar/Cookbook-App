@@ -50,7 +50,18 @@ class _RecipeInspectState extends State<RecipeInspect> {
   Widget build(BuildContext context) {
 
 
-    String prepTime = widget.recipe.preparingTime;
+    String generateTime(String pMin, String pHour, String pWholeTime) {
+
+      pHour = pWholeTime.substring(0,2);
+      pMin = pWholeTime.substring(2,4);
+      pWholeTime = pHour + "Hours "+pMin+" Minutes ";
+      pWholeTime = pHour + "Hours "+pMin+" Minutes ";
+      return pWholeTime;
+    }
+    String min="", hour="";
+
+    //tring prepTime = widget.recipe.preparingTime;
+    String prepTime = generateTime(min, hour, widget.recipe.preparingTime);
     String cookTime = widget.recipe.cookingTime;
     Icon someIcon = getIcon(widget.recipe.isFavorite);
     return Scaffold(
