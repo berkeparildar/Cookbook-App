@@ -21,11 +21,30 @@ class Recipe {
   final int minutes;
   final int seconds;
 
+  Map<String,dynamic> toMap(){
+    return{
+      "name" : name,
+      "description" : description,
+      "notes" : notes,
+      "selectedTags" : selectedTags,
+      "isFavorite" : isFavorite,
+      "ingredients" : ingredients,
+      "method" : method,
+      "cookingTime" : cookingTime,
+      "preparingTime" : preparingTime,
+      "hours" : hours,
+      "minutes" : minutes,
+      "seconds" : seconds
 
-
-
-
+    };
+  }
 }
+
+
+
+
+
+
 
 
 

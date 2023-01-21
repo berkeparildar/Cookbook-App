@@ -1,4 +1,5 @@
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:se380_project/bottom_bar.dart';
 import 'package:se380_project/main.dart';
@@ -496,6 +497,12 @@ class _AddRecipeState extends State<AddRecipePage> {
     );
   }
 
+  Future<void>  saveRecipeFirestore(Recipe pRecipe) async {
+    MyHomePage.getRecipes().add(pRecipe);
+
+    await FirebaseFirestore.instance.collection("recipes").add(pRecipe.toMap());
+
+  }
   void saveRecipe() {
     recipeName = recipeNameController.text;
     recipeDescription = recipeDescriptionController.text;
@@ -526,7 +533,7 @@ class _AddRecipeState extends State<AddRecipePage> {
     print("Add this " + addRecipe.toString() + " object to firebase.");
     print("The picture is saved too its reference is " + recipePic.toString());
     print(addRecipe.selectedTags);
-    MyHomePage.getRecipes().add(addRecipe);
+    saveRecipeFirestore(addRecipe);
   }
 
   ToggleButtons buildToggleButtons(int start, int end) {
