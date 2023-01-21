@@ -477,8 +477,8 @@ class _AddRecipeState extends State<AddRecipePage> {
                                           preparingTController.text = value!;
                                         },
                                         textInputAction: TextInputAction.done,
-                                        maxLines: 10,
-                                        minLines: 3,
+                                        maxLines: 1,
+                                        minLines: 1,
                                       )),
                                 ),
                               ],

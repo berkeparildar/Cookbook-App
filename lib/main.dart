@@ -11,8 +11,7 @@ import 'package:se380_project/google_sign_in.dart';
 import 'firebase_options.dart';
 import 'tags.dart';
 
-void main()  {
-
+void main() {
   runApp(MyApp());
 }
 
@@ -31,16 +30,14 @@ class _SplashScreenState extends State<SplashScreen> {
     // TODO: implement initState
     super.initState();
     initializeFirebase();
-
   }
 
   Future<void> initializeFirebase() async {
     await Firebase.initializeApp();
     setState(() {
       isFireBaseInit = true;
-
     });
-    if (FirebaseAuth.instance.currentUser != null){
+    if (FirebaseAuth.instance.currentUser != null) {
       goToMain();
     }
     //goToMain();
@@ -54,12 +51,53 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: isFireBaseInit ? ElevatedButton(onPressed: () async {
-          await signInWithGoogle();
-          goToMain();
-        },
-            child: Text('data')) : CircularProgressIndicator(),
+      body: DecoratedBox(
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("Assets/images/bg.jpg"), fit: BoxFit.cover)),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaY: 10, sigmaX: 10),
+          child: Center(
+            child: Column(
+              children: <Widget>[
+                const Expanded(
+                  flex: 40,
+                  child: Center(
+                      child: Text(
+                    "COOKBOOK",
+                    style: TextStyle(
+                        fontFamily: "DancingScript",
+                        fontSize: 55,
+                        fontWeight: FontWeight.bold),
+                  )),
+                ),
+                Expanded(
+                  flex: 60,
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(4),
+                        child: ElevatedButton(
+                          onPressed: () async {
+                            await signInWithGoogle();
+                            goToMain();
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: const [
+                              Text("Login"),
+                              Icon(Icons.add),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -246,8 +284,9 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: ElevatedButton(
                           onPressed: () async {
                             await signOutWithGogle();
-                            Navigator.of(context)
-                                .pushReplacement(MaterialPageRoute(builder: (context) => SplashScreen()));
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                    builder: (context) => SplashScreen()));
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
