@@ -6,7 +6,6 @@ import 'package:se380_project/recipe.dart';
 import 'camera.dart';
 import 'dart:io';
 
-
 class AddRecipePage extends StatefulWidget {
   const AddRecipePage({super.key});
 
@@ -32,7 +31,6 @@ const List<Widget> listOfTags = <Widget>[
   Text("Lunch"),
   Text("Snacks")
 ];
-
 
 class _AddRecipeState extends State<AddRecipePage> {
   final myController = TextEditingController();
@@ -104,7 +102,6 @@ class _AddRecipeState extends State<AddRecipePage> {
   final TextEditingController preparingHController = TextEditingController();
   final TextEditingController preparingMController = TextEditingController();
 
-
   String? recipeName,
       recipeDescription,
       recipeNotes,
@@ -114,11 +111,11 @@ class _AddRecipeState extends State<AddRecipePage> {
       preparingTime,
       preparingH,
       preparingM,
-      preparingTimeHour, preparingTimeMin;
+      preparingTimeHour,
+      preparingTimeMin;
 
   //Image recipePic = Image.file(new File("Assets/images/tag_images/asian.jpg"));
   Image? recipePic;
-
 
   @override
   Widget build(BuildContext context) {
@@ -126,8 +123,8 @@ class _AddRecipeState extends State<AddRecipePage> {
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
         backgroundColor: Colors.grey.shade800,
-        title: Text("CookBook"),
-        titleTextStyle: TextStyle(
+        title: const Text("CookBook"),
+        titleTextStyle: const TextStyle(
           fontFamily: "DancingScript",
           fontSize: 35,
         ),
@@ -159,10 +156,10 @@ class _AddRecipeState extends State<AddRecipePage> {
             child: Column(
               children: [
                 Padding(
-                  padding: EdgeInsets.all(6),
+                  padding: const EdgeInsets.all(6),
                   child: Column(
                     children: [
-                      Align(
+                      const Align(
                         alignment: Alignment.topLeft,
                         child: Text(
                           "Name",
@@ -173,7 +170,7 @@ class _AddRecipeState extends State<AddRecipePage> {
                           ),
                         ),
                       ),
-                      Padding(
+                      const Padding(
                           padding: EdgeInsets.symmetric(
                         horizontal: 0,
                         vertical: 4,
@@ -181,7 +178,7 @@ class _AddRecipeState extends State<AddRecipePage> {
                       Form(
                         key: _formKey,
                         child: TextFormField(
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             hintText: 'Vegetable Lasagna',
                           ),
                           onChanged: (text) {
@@ -199,7 +196,7 @@ class _AddRecipeState extends State<AddRecipePage> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.all(6),
+                  padding: const EdgeInsets.all(6),
                   child: Column(
                     children: [
                       const Align(
@@ -213,7 +210,7 @@ class _AddRecipeState extends State<AddRecipePage> {
                           ),
                         ),
                       ),
-                      Padding(
+                      const Padding(
                           padding: EdgeInsets.symmetric(
                         horizontal: 0,
                         vertical: 4,
@@ -221,7 +218,7 @@ class _AddRecipeState extends State<AddRecipePage> {
                       Form(
                         key: _formKey1,
                         child: TextFormField(
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             hintText: 'Wholesome hearty winter lasagna recipe',
                           ),
                           onChanged: (text) {
@@ -239,7 +236,7 @@ class _AddRecipeState extends State<AddRecipePage> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.all(6),
+                  padding: const EdgeInsets.all(6),
                   child: Column(
                     children: [
                       const Align(
@@ -280,7 +277,7 @@ class _AddRecipeState extends State<AddRecipePage> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.all(6),
+                  padding: const EdgeInsets.all(6),
                   child: Column(
                     children: const [
                       Align(
@@ -315,10 +312,10 @@ class _AddRecipeState extends State<AddRecipePage> {
                 Column(
                   children: [
                     Padding(
-                      padding: EdgeInsets.all(6),
+                      padding: const EdgeInsets.all(6),
                       child: Column(
                         children: [
-                          Align(
+                          const Align(
                               alignment: Alignment.topLeft,
                               child: Text(
                                 "Ingredients",
@@ -328,16 +325,20 @@ class _AddRecipeState extends State<AddRecipePage> {
                                   fontSize: 20,
                                 ),
                               )),
-                          Padding(
+                          const Padding(
                               padding: EdgeInsets.symmetric(
                             horizontal: 0,
-                            vertical: 4,
+                            vertical: 6,
                           )),
                           Form(
                               key: _formKey4,
                               child: TextFormField(
-                                decoration: InputDecoration(
-                                    hintText: "Enter your ingredients here."),
+                                decoration: const InputDecoration(
+                                  hintStyle: TextStyle(
+                                    fontSize: 14,
+                                  ),
+                                    hintText:
+                                        "Enter your ingredients here.\nSeperate the ingredients with '+' sign."),
                                 onChanged: (text) {
                                   print('First text field: $text');
                                 },
@@ -347,14 +348,36 @@ class _AddRecipeState extends State<AddRecipePage> {
                                   ingredientController.text = value!;
                                 },
                                 textInputAction: TextInputAction.done,
-                                maxLines: 17,
-                                minLines: 15,
+                                maxLines: 5,
+                                minLines: 2,
                               )),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(6),
+                      child: Column(
+                        children: [
+                          const Align(
+                              alignment: Alignment.topLeft,
+                              child: Text(
+                                "Method",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                ),
+                              )),
+                          const Padding(
+                              padding: EdgeInsets.symmetric(
+                            horizontal: 0,
+                            vertical: 6,
+                          )),
                           Form(
                               key: _formKey5,
                               child: TextFormField(
-                                decoration: InputDecoration(
-                                    hintText: "Enter your method here"),
+                                decoration: const InputDecoration(
+                                    hintText: "Enter your method here. \nSeperate the steps with '*' sign."),
                                 onChanged: (text) {
                                   print('First text field: $text');
                                 },
@@ -365,111 +388,111 @@ class _AddRecipeState extends State<AddRecipePage> {
                                 },
                                 textInputAction: TextInputAction.done,
                                 maxLines: 10,
-                                minLines: 5,
+                                minLines: 2,
                               )),
-                          Form(
-                              key: _formKey6,
-                              child: TextFormField(
-                                decoration: InputDecoration(
-                                    hintText: "Enter the cooking time here"),
-                                onChanged: (text) {
-                                  print('First text field: $text');
-                                },
-                                controller: cookingTController,
-                                keyboardType: TextInputType.name,
-                                onSaved: (value) {
-                                  cookingTController.text = value!;
-                                },
-                                textInputAction: TextInputAction.done,
-                                maxLines: 10,
-                                minLines: 3,
-                              )),
-                          Form(
-                              key: _formKey7,
-                              child: TextFormField(
-                                decoration: InputDecoration(
-                                    hintText: "Enter the preparing time here."),
-                                onChanged: (text) {
-                                  print('First text field: $text');
-                                },
-                                controller: preparingTController,
-                                keyboardType: TextInputType.name,
-                                onSaved: (value) {
-                                  preparingTController.text = value!;
-                                },
-                                textInputAction: TextInputAction.done,
-                                maxLines: 10,
-                                minLines: 3,
-                              )),
-                          /*Form(
-                              key: _formKey8,
-                              child: TextFormField(
-                                decoration: InputDecoration(
-                                    hintText:
-                                        "Enter the preparing time in hours."),
-                                onChanged: (text) {
-                                  print('First text field: $text');
-                                },
-                                controller: preparingHController,
-                                keyboardType: TextInputType.name,
-                                onSaved: (value) {
-                                  preparingHController.text = value!;
-                                },
-                                textInputAction: TextInputAction.done,
-                                maxLines: 10,
-                                minLines: 3,
-                              )),
-                          Form(
-                              key: _formKey9,
-                              child: TextFormField(
-                                decoration: InputDecoration(
-                                    hintText:
-                                        "Enter the preparing time in minutes."),
-                                onChanged: (text) {
-                                  print('First text field: $text');
-                                },
-                                controller: preparingMController,
-                                keyboardType: TextInputType.name,
-                                onSaved: (value) {
-                                  preparingMController.text = value!;
-                                },
-                                textInputAction: TextInputAction.done,
-                                maxLines: 10,
-                                minLines: 3,
-                              ))*/
-                          Align(
-                              alignment: Alignment.topLeft,
-                              child: Text(
-                                "Add Photo",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                ),
-                              )),
-                          Column(mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              ElevatedButton(
-                                  onPressed: () {
-                                    cameraScreen(recipePic, context);
-
-                                  }, child: Icon(Icons.camera)),
-                            ],
-                          ),
-
                         ],
                       ),
-                    )
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(6),
+                      child: Row(
+                        children: [ Expanded(
+                          flex: 5,
+                          child: Column(
+                            children: [
+                              const Align(
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    "Cooking Time",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                    ),
+                                  )),
+                              const Padding(
+                                  padding: EdgeInsets.symmetric(
+                                horizontal: 0,
+                                vertical: 6,
+                              )),
+                              SizedBox(
+                                width: 70,
+                                height: 50,
+                                child: Form(
+                                    key: _formKey6,
+                                    child: TextFormField(
+                                      textAlign: TextAlign.center,
+                                      decoration: const InputDecoration(
+                                          hintText: "00:00",),
+                                      onChanged: (text) {
+                                        print('First text field: $text');
+                                      },
+                                      controller: cookingTController,
+                                      keyboardType: TextInputType.name,
+                                      onSaved: (value) {
+                                        cookingTController.text = value!;
+                                      },
+                                      textInputAction: TextInputAction.done,
+                                      maxLines: 1,
+                                      minLines: 1,
+                                    )),
+                              ),
+                            ],
+                          ),
+                        ),
+                          Expanded(
+                            flex: 5,
+                            child: Column(
+                              children: [
+                                const Align(
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      "Preparation Time",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                      ),
+                                    )),
+                                const Padding(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 0,
+                                      vertical: 6,
+                                    )),
+                                SizedBox(
+                                  width: 70,
+                                  height: 50,
+                                  child: Form(
+                                      key: _formKey7,
+                                      child: TextFormField(
+                                        textAlign: TextAlign.center,
+                                        decoration: const InputDecoration(
+                                            hintText: "00:00"),
+                                        onChanged: (text) {
+                                          print('First text field: $text');
+                                        },
+                                        controller: preparingTController,
+                                        keyboardType: TextInputType.name,
+                                        onSaved: (value) {
+                                          preparingTController.text = value!;
+                                        },
+                                        textInputAction: TextInputAction.done,
+                                        maxLines: 10,
+                                        minLines: 3,
+                                      )),
+                                ),
+                              ],
+                            ),
+                          ),
+                      ]
+                      ),
+                    ),
                   ],
                 ),
               ],
             ),
           ),
         ),
-      ),
-      bottomNavigationBar: BottomBar(
-        isInAddRecipe: true,
-        selectedIndex: 0,
       ),
     );
   }
@@ -485,27 +508,24 @@ class _AddRecipeState extends State<AddRecipePage> {
     preparingH = preparingHController.text;
     preparingM = preparingMController.text;
 
-
-    preparingTimeHour = preparingTime.toString().substring(0,2);
-    preparingTimeMin = preparingTime.toString().substring(2,4);
-
-
+    preparingTimeHour = preparingTController.text.split(":")[0];
+    preparingTimeMin = preparingTController.text.split(":")[1];
 
     Recipe addRecipe = Recipe(
-        name: recipeName.toString(),
-        description: recipeDescription.toString(),
-        notes: recipeNotes.toString(),
-        selectedTags: addRecipeTags,
-        ingredients: recipeIngredient.toString(),
-        method: recipeMethod.toString(),
-        cookingTime: cookingTController.text,
-        preparingTime: preparingTController.text,
-        hours: int.parse(preparingTimeHour.toString()),
-        minutes: int.parse(preparingTimeMin.toString()),
-        seconds: 0,
-        );
+      name: recipeName.toString(),
+      description: recipeDescription.toString(),
+      notes: recipeNotes.toString(),
+      selectedTags: addRecipeTags,
+      ingredients: recipeIngredient.toString(),
+      method: recipeMethod.toString(),
+      cookingTime: cookingTController.text,
+      preparingTime: preparingTController.text,
+      hours: int.parse(preparingTimeHour.toString()),
+      minutes: int.parse(preparingTimeMin.toString()),
+      seconds: 0,
+    );
     print("Add this " + addRecipe.toString() + " object to firebase.");
-    print("The picture is saved too its reference is "+ recipePic.toString());
+    print("The picture is saved too its reference is " + recipePic.toString());
     print(addRecipe.selectedTags);
     MyHomePage.getRecipes().add(addRecipe);
   }
@@ -519,7 +539,7 @@ class _AddRecipeState extends State<AddRecipePage> {
       color: Colors.white,
       isSelected: selectedTags.sublist(start, end),
       selectedColor: Colors.white,
-      borderRadius: BorderRadius.all(Radius.circular(8)),
+      borderRadius: const BorderRadius.all(Radius.circular(8)),
       fillColor: Colors.blueGrey,
       borderColor: Colors.white,
       selectedBorderColor: Colors.blueGrey,

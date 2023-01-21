@@ -19,20 +19,21 @@ class _RecipeCarouselState extends State<RecipeCarousel> {
     MyTimer myTimer = MyTimer(timerSeconds: 0, timerHours: 0, timerMinutes: 0);
 
     String generateHour(String pHour, String pWholeTime) {
-      pHour = pWholeTime.substring(0, 2);
-
+      List<String> arr = pWholeTime.split(":");
+      pHour = arr[0];
       return pHour;
     }
 
     String generateMin(String pMin, String pWholeTime) {
-      pMin = pWholeTime.substring(2,4);
-
+      List<String> arr = pWholeTime.split(":");
+      pMin = arr[1];
       return pMin;
     }
-    String hour="", min="";
 
-    hour = generateHour(hour, widget.recipe.preparingTime);
-    min = generateMin(min, widget.recipe.preparingTime);
+    String hour = "", min = "";
+
+    hour = generateHour(hour, widget.recipe.cookingTime);
+    min = generateMin(min, widget.recipe.cookingTime);
     myTimer.setSecond(0);
     //myTimer.setMinute(widget.recipe.minutes);
     //myTimer.setHour(widget.recipe.hours);
@@ -78,13 +79,13 @@ class _RecipeCarouselState extends State<RecipeCarousel> {
                 showDialog(
                     context: context,
                     builder: (BuildContext context) => SimpleDialog(
-                          title: Text("Timer"),
-                          children: [myTimer],
+                          title: const Text("Timer"),
                           backgroundColor: Colors.grey.shade700,
                           alignment: Alignment.center,
+                          children: [myTimer],
                         ));
               },
-              child: Icon(Icons.timer)),
+              child: const Icon(Icons.timer)),
         ),
       ),
     );
@@ -97,7 +98,8 @@ class CarouselPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<String> arr = ['one', 'two', "three", "four"];
+    List<String> methods = recipe.method.split("*");
+    List<String> ingredients = recipe.ingredients.split("+");
     final PageController controller = PageController();
 
     return PageView(
@@ -108,69 +110,83 @@ class CarouselPage extends StatelessWidget {
       children: <Widget>[
         DecoratedBox(
           decoration: BoxDecoration(color: Colors.grey.shade800),
-          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-              SizedBox(
-                width: 120,
-                height: 120,
-                child: Column(
-                  children: [
-                    const Icon(Icons.access_alarm_outlined),
-                    const Padding(padding: EdgeInsets.all(4)),
-                    Text('Prep: ${recipe.preparingTime}')
-                  ],
+          child: Center(
+            child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                SizedBox(
+                  width: 180,
+                  height: 180,
+                  child: Column(
+                    children: [
+                      const Icon(Icons.access_alarm_outlined),
+                      const Padding(padding: EdgeInsets.all(4)),
+                      Text('Prep: ${recipe.preparingTime}')
+                    ],
+                  ),
                 ),
-              ),
-              SizedBox(
-                width: 120,
-                height: 120,
-                child: Column(
-                  children: [
-                    const Icon(Icons.present_to_all),
-                    const Padding(padding: EdgeInsets.all(4)),
-                    Text('Cook: ${recipe.cookingTime}')
-                  ],
+                SizedBox(
+                  width: 180,
+                  height: 180,
+                  child: Column(
+                    children: [
+                      const Icon(Icons.present_to_all),
+                      const Padding(padding: EdgeInsets.all(4)),
+                      Text('Cook: ${recipe.cookingTime}')
+                    ],
+                  ),
                 ),
-              ),
+              ]),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: 180,
+                    height: 180,
+                    child: Column(
+                      children: [
+                        const Icon(Icons.shopping_bag_outlined),
+                        const Padding(padding: EdgeInsets.all(4)),
+                        Text('${ingredients.length} ingredients')
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    width: 180,
+                    height: 180,
+                    child: Column(
+                      children: [
+                        const Icon(Icons.restaurant),
+                        const Padding(padding: EdgeInsets.all(4)),
+                        Text(recipe.name)
+                      ],
+                    ),
+                  ),
+                ],
+              )
             ]),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                  width: 120,
-                  height: 120,
-                  child: Column(
-                    children: [
-                      const Icon(Icons.shopping_bag_outlined),
-                      const Padding(padding: EdgeInsets.all(4)),
-                      Text('${recipe.ingredients.length} ingredients')
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  width: 120,
-                  height: 120,
-                  child: Column(
-                    children: [
-                      const Icon(Icons.restaurant),
-                      const Padding(padding: EdgeInsets.all(4)),
-                      Text('${recipe.name}')
-                    ],
-                  ),
-                ),
-              ],
-            )
-          ]),
+          ),
         ),
         ...List<Widget>.generate(
-            4,
+            methods.length,
             (index) => DecoratedBox(
                 decoration: BoxDecoration(color: Colors.grey.shade800),
-                child: Column(children: [
-                  Center(
-                    child: Text('${index + 1}.'),
-                  ),
-                ]))),
+                child: Center(
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          '${index + 1}.',
+                          style: const TextStyle(fontSize: 40, color: Colors.white),
+                        ),
+                        const Padding(padding: EdgeInsets.all(6)),
+                        Text(methods[index],
+                        softWrap: true,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 24,
+                        ),),
+                      ]),
+                ))),
       ],
     );
   }
@@ -210,9 +226,7 @@ class _MyTimerState extends State<MyTimer> {
   @override
   void initState() {
     myDuration = Duration(
-        hours: widget.timerHours,
-        minutes: widget.timerMinutes,
-        seconds: 0);
+        hours: widget.timerHours, minutes: widget.timerMinutes, seconds: 0);
     super.initState();
   }
 
@@ -222,7 +236,7 @@ class _MyTimerState extends State<MyTimer> {
   }
 
   void setCountDown() {
-    final reduceSec = 1;
+    const reduceSec = 1;
     setState(() {
       final seconds = myDuration.inSeconds - reduceSec;
       if (seconds < 0) {
@@ -254,8 +268,7 @@ class _MyTimerState extends State<MyTimer> {
     final minutes = strDigits(myDuration.inMinutes.remainder(60));
     final seconds = strDigits(myDuration.inSeconds.remainder(60));
 
-    return Expanded(
-        child: Center(
+    return Center(
       child: Column(
         children: [
           const SizedBox(
@@ -272,7 +285,7 @@ class _MyTimerState extends State<MyTimer> {
           ElevatedButton(
             onPressed: startTimer,
             child: const Text(
-              'start',
+              'Start',
               style: TextStyle(
                 fontSize: 30,
               ),
@@ -303,6 +316,6 @@ class _MyTimerState extends State<MyTimer> {
               ))
         ],
       ),
-    ));
+    );
   }
 }
