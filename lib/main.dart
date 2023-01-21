@@ -3,17 +3,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:se380_project/favorites_page.dart';
-import 'package:se380_project/main.dart';
 import 'package:se380_project/my_recipes.dart';
 import 'package:se380_project/recipe_inspect.dart';
 import 'add_recipe.dart';
 import 'package:se380_project/recipe.dart';
 import 'package:se380_project/google_sign_in.dart';
+import 'firebase_options.dart';
 import 'tags.dart';
-import 'dart:io';
 
-void main() {
-  runApp(const MyApp());
+void main()  {
+
+  runApp(MyApp());
 }
 
 class SplashScreen extends StatefulWidget {
@@ -31,17 +31,19 @@ class _SplashScreenState extends State<SplashScreen> {
     // TODO: implement initState
     super.initState();
     initializeFirebase();
-    if (FirebaseAuth.instance.currentUser != null){
-      goToMain();
-    }
+
   }
 
   Future<void> initializeFirebase() async {
     await Firebase.initializeApp();
     setState(() {
       isFireBaseInit = true;
+
     });
-    goToMain();
+    if (FirebaseAuth.instance.currentUser != null){
+      goToMain();
+    }
+    //goToMain();
   }
 
   void goToMain() {

@@ -1,10 +1,9 @@
-import 'package:camera/camera.dart';
+
 import 'package:flutter/material.dart';
 import 'package:se380_project/bottom_bar.dart';
 import 'package:se380_project/main.dart';
 import 'package:se380_project/recipe.dart';
-import 'camera.dart';
-import 'dart:io';
+
 
 class AddRecipePage extends StatefulWidget {
   const AddRecipePage({super.key});
