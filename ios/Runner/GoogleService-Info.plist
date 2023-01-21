@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>1060849439887-ss7b9d9q8k7qll6dhjv82kp4ctedr3nj.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1060849439887-ss7b9d9q8k7qll6dhjv82kp4ctedr3nj</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDufkhZ3jXABkgEtDEYJx4Pj79MfZv3QSg</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1060849439887</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.partur.se380Project</string>
+	<key>PROJECT_ID</key>
+	<string>se320-project-cookbook</string>
+	<key>STORAGE_BUCKET</key>
+	<string>se320-project-cookbook.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1060849439887:ios:2222293d5ea49f7a260cfa</string>
+</dict>
+</plist>
